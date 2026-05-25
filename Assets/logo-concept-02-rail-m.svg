@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+    <title id="title">Logo concept 02 - rail M</title>
+    <desc id="desc">A minimalist rail-constructed M with uniform stroke and aligned terminals.</desc>
+    <rect width="128" height="128" rx="28" fill="#071012" />
+    <path
+        d="M32 92V36L64 76L96 36V92"
+        fill="none"
+        stroke="#f6f1e8"
+        stroke-linecap="square"
+        stroke-linejoin="miter"
+        stroke-width="12"
+    />
+    <path d="M88 36H104V52H88V36Z" fill="#7ff0d7" />
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960" role="img" aria-labelledby="title desc">
+    <title id="title">HiMaiz M-based logo concepts preview</title>
+    <desc id="desc">Five modern M-based mark-only logo concepts for review.</desc>
+    <defs>
+        <style>
+            .label {
+                fill: #071012;
+                font-family: "Geist", Inter, Arial, sans-serif;
+                font-size: 30px;
+                font-weight: 650;
+                letter-spacing: -0.4px;
+            }
+
+            .meta {
+                fill: #687477;
+                font-family: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+                font-size: 14px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+        </style>
+        <symbol id="concept-01" viewBox="0 0 128 128">
+            <rect width="128" height="128" rx="28" fill="#071012" />
+            <path d="M30 92V36H46L64 62L82 36H98V92H84V58L68 82H60L44 58V92H30Z" fill="#f6f1e8" />
+            <path d="M64 62L82 36H98L68 82H60L30 36H46L64 62Z" fill="#7ff0d7" opacity="0.2" />
+        </symbol>
+        <symbol id="concept-02" viewBox="0 0 128 128">
+            <rect width="128" height="128" rx="28" fill="#071012" />
+            <path d="M32 92V36L64 76L96 36V92" fill="none" stroke="#f6f1e8" stroke-linecap="square" stroke-linejoin="miter" stroke-width="12" />
+            <path d="M88 36H104V52H88V36Z" fill="#7ff0d7" />
+        </symbol>
+        <symbol id="concept-03" viewBox="0 0 128 128">
+            <rect width="128" height="128" rx="28" fill="#071012" />
+            <path d="M28 92V36H44V92H28Z" fill="#f6f1e8" />
+            <path d="M48 36H64L76 58L68 74L48 36Z" fill="#f6f1e8" />
+            <path d="M80 36H100V92H84V58L72 82H56L80 36Z" fill="#f6f1e8" />
+            <path d="M65 62L72 49L79 62L72 75L65 62Z" fill="#7ff0d7" />
+        </symbol>
+        <symbol id="concept-04" viewBox="0 0 128 128">
+            <rect width="128" height="128" rx="28" fill="#071012" />
+            <path d="M28 36H100V92H84V58L70 80H58L44 58V92H28V36Z" fill="#f6f1e8" />
+            <path d="M44 36L64 66L84 36H68L64 42L60 36H44Z" fill="#071012" />
+            <path d="M84 36H100V52H84V36Z" fill="#7ff0d7" />
+        </symbol>
+        <symbol id="concept-05" viewBox="0 0 128 128">
+            <rect width="128" height="128" rx="28" fill="#071012" />
+            <path d="M26 94V34H48L64 62L80 34H102V94H86V58L70 86H58L42 58V94H26Z" fill="#f6f1e8" />
+            <path d="M80 34H102V56H80V34Z" fill="#7ff0d7" />
+            <path d="M80 56H86V70L70 86H58L80 56Z" fill="#071012" opacity="0.18" />
+        </symbol>
+    </defs>
+    <rect width="1600" height="960" fill="#f4f1eb" />
+    <text class="meta" x="96" y="86">HiMaiz / M-based logo concepts / grid-built</text>
+
+    <g transform="translate(96 152)">
+        <use href="#concept-01" width="220" height="220" />
+        <text class="label" x="0" y="286">01 Folded M</text>
+        <text class="meta" x="0" y="324">solid / dimensional / calm</text>
+    </g>
+    <g transform="translate(392 152)">
+        <use href="#concept-02" width="220" height="220" />
+        <text class="label" x="0" y="286">02 Rail M</text>
+        <text class="meta" x="0" y="324">minimal / precise / iconic</text>
+    </g>
+    <g transform="translate(688 152)">
+        <use href="#concept-03" width="220" height="220" />
+        <text class="label" x="0" y="286">03 Cut M</text>
+        <text class="meta" x="0" y="324">modular / sharp / engineered</text>
+    </g>
+    <g transform="translate(984 152)">
+        <use href="#concept-04" width="220" height="220" />
+        <text class="label" x="0" y="286">04 Window M</text>
+        <text class="meta" x="0" y="324">negative-space / clean / app</text>
+    </g>
+    <g transform="translate(1280 152)">
+        <use href="#concept-05" width="220" height="220" />
+        <text class="label" x="0" y="286">05 Monolith M</text>
+        <text class="meta" x="0" y="324">bold / premium / compact</text>
+    </g>
+
+    <g transform="translate(96 590)">
+        <text class="meta" x="0" y="0">small-size favicon check</text>
+        <use href="#concept-01" x="0" y="46" width="64" height="64" />
+        <use href="#concept-02" x="96" y="46" width="64" height="64" />
+        <use href="#concept-03" x="192" y="46" width="64" height="64" />
+        <use href="#concept-04" x="288" y="46" width="64" height="64" />
+        <use href="#concept-05" x="384" y="46" width="64" height="64" />
+    </g>
+</svg>

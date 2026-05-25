@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+    <title id="title">Monolith M light logo mark</title>
+    <desc id="desc">Light-background version of the Monolith M mark.</desc>
+    <rect width="128" height="128" rx="28" fill="#f4f1eb" />
+    <path d="M26 94V34H48L64 62L80 34H102V94H86V58L70 86H58L42 58V94H26Z" fill="#071012" />
+    <path d="M80 34H102V56H80V34Z" fill="#7ff0d7" />
+    <path d="M80 56H86V70L70 86H58L80 56Z" fill="#f4f1eb" opacity="0.28" />
+</svg>

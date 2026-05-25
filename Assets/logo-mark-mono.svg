@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+    <title id="title">Monolith M monochrome logo mark</title>
+    <desc id="desc">Single-color Monolith M mark for print and restricted-color uses.</desc>
+    <rect width="128" height="128" rx="28" fill="#071012" />
+    <path d="M26 94V34H48L64 62L80 34H102V94H86V58L70 86H58L42 58V94H26Z" fill="#f6f1e8" />
+    <path d="M80 56H86V70L70 86H58L80 56Z" fill="#071012" opacity="0.18" />
+</svg>

@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc">
+    <title id="title">Monolith M brand source</title>
+    <desc id="desc">Editable vector source for the selected HiMaiz Monolith M mark system.</desc>
+    <defs>
+        <style>
+            :root {
+                --hm-charcoal: #071012;
+                --hm-ink: #f6f1e8;
+                --hm-accent: #7ff0d7;
+                --hm-paper: #f4f1eb;
+                --hm-muted: #687477;
+                --hm-line: #d8d2c8;
+            }
+
+            .label {
+                fill: var(--hm-muted);
+                font-family: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+                font-size: 14px;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+            }
+
+            .note {
+                fill: #837a70;
+                font-family: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+                font-size: 12px;
+                letter-spacing: 1.6px;
+            }
+
+            .word {
+                fill: var(--hm-charcoal);
+                font-family: "Geist", Inter, Arial, sans-serif;
+                font-size: 84px;
+                font-weight: 650;
+                letter-spacing: -2.8px;
+            }
+        </style>
+
+        <symbol id="monolith-dark" viewBox="0 0 128 128">
+            <rect width="128" height="128" rx="28" fill="var(--hm-charcoal)" />
+            <path d="M26 94V34H48L64 62L80 34H102V94H86V58L70 86H58L42 58V94H26Z" fill="var(--hm-ink)" />
+            <path d="M80 34H102V56H80V34Z" fill="var(--hm-accent)" />
+            <path d="M80 56H86V70L70 86H58L80 56Z" fill="var(--hm-charcoal)" opacity="0.18" />
+        </symbol>
+
+        <symbol id="monolith-light" viewBox="0 0 128 128">
+            <rect width="128" height="128" rx="28" fill="var(--hm-paper)" />
+            <path d="M26 94V34H48L64 62L80 34H102V94H86V58L70 86H58L42 58V94H26Z" fill="var(--hm-charcoal)" />
+            <path d="M80 34H102V56H80V34Z" fill="var(--hm-accent)" />
+            <path d="M80 56H86V70L70 86H58L80 56Z" fill="var(--hm-paper)" opacity="0.28" />
+        </symbol>
+
+        <symbol id="monolith-mono" viewBox="0 0 128 128">
+            <rect width="128" height="128" rx="28" fill="var(--hm-charcoal)" />
+            <path d="M26 94V34H48L64 62L80 34H102V94H86V58L70 86H58L42 58V94H26Z" fill="var(--hm-ink)" />
+            <path d="M80 56H86V70L70 86H58L80 56Z" fill="var(--hm-charcoal)" opacity="0.18" />
+        </symbol>
+
+        <symbol id="monolith-transparent" viewBox="0 0 128 128">
+            <path d="M26 94V34H48L64 62L80 34H102V94H86V58L70 86H58L42 58V94H26Z" fill="var(--hm-charcoal)" />
+            <path d="M80 34H102V56H80V34Z" fill="var(--hm-accent)" />
+            <path d="M80 56H86V70L70 86H58L80 56Z" fill="var(--hm-paper)" opacity="0.42" />
+        </symbol>
+    </defs>
+
+    <rect width="1440" height="960" fill="var(--hm-paper)" />
+
+    <g transform="translate(96 92)">
+        <text class="label" x="0" y="0">Selected mark / Monolith M</text>
+        <use href="#monolith-dark" x="0" y="48" width="260" height="260" />
+        <text class="word" x="324" y="184">Monolith M</text>
+        <text class="note" x="328" y="224">compact / premium / app-ready / M-based</text>
+    </g>
+
+    <g transform="translate(96 456)">
+        <text class="label" x="0" y="0">Primary dark</text>
+        <use href="#monolith-dark" x="0" y="48" width="160" height="160" />
+    </g>
+
+    <g transform="translate(320 456)">
+        <text class="label" x="0" y="0">Light</text>
+        <use href="#monolith-light" x="0" y="48" width="160" height="160" />
+    </g>
+
+    <g transform="translate(544 456)">
+        <text class="label" x="0" y="0">Mono</text>
+        <use href="#monolith-mono" x="0" y="48" width="160" height="160" />
+    </g>
+
+    <g transform="translate(768 456)">
+        <text class="label" x="0" y="0">Transparent</text>
+        <use href="#monolith-transparent" x="0" y="48" width="160" height="160" />
+    </g>
+
+    <g transform="translate(1008 456)">
+        <text class="label" x="0" y="0">Small-size check</text>
+        <use href="#monolith-dark" x="0" y="56" width="64" height="64" />
+        <use href="#monolith-dark" x="92" y="64" width="48" height="48" />
+        <use href="#monolith-dark" x="168" y="72" width="32" height="32" />
+        <text class="note" x="0" y="160">64 / 48 / 32 px</text>
+    </g>
+
+    <g transform="translate(96 760)">
+        <text class="label" x="0" y="0">Construction grid</text>
+        <rect x="0" y="36" width="128" height="128" rx="28" fill="none" stroke="var(--hm-line)" />
+        <path d="M26 130V70H48L64 98L80 70H102V130H86V94L70 122H58L42 94V130H26Z" fill="none" stroke="var(--hm-charcoal)" stroke-width="2" />
+        <path d="M80 70H102V92H80V70Z" fill="var(--hm-accent)" opacity="0.72" />
+        <g stroke="var(--hm-line)" stroke-width="1">
+            <line x1="26" y1="36" x2="26" y2="164" />
+            <line x1="42" y1="36" x2="42" y2="164" />
+            <line x1="58" y1="36" x2="58" y2="164" />
+            <line x1="70" y1="36" x2="70" y2="164" />
+            <line x1="86" y1="36" x2="86" y2="164" />
+            <line x1="102" y1="36" x2="102" y2="164" />
+            <line x1="0" y1="70" x2="128" y2="70" />
+            <line x1="0" y1="94" x2="128" y2="94" />
+            <line x1="0" y1="122" x2="128" y2="122" />
+            <line x1="0" y1="130" x2="128" y2="130" />
+        </g>
+    </g>
+</svg>

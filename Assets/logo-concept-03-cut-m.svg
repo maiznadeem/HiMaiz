@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+    <title id="title">Logo concept 03 - cut M</title>
+    <desc id="desc">A sharp modular M built from four consistent cut blocks.</desc>
+    <rect width="128" height="128" rx="28" fill="#071012" />
+    <path d="M28 92V36H44V92H28Z" fill="#f6f1e8" />
+    <path d="M48 36H64L76 58L68 74L48 36Z" fill="#f6f1e8" />
+    <path d="M80 36H100V92H84V58L72 82H56L80 36Z" fill="#f6f1e8" />
+    <path d="M65 62L72 49L79 62L72 75L65 62Z" fill="#7ff0d7" />
+</svg>

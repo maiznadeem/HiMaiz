@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+    <title id="title">Logo concept 01 - folded M</title>
+    <desc id="desc">A grid-built M mark with folded inner geometry.</desc>
+    <rect width="128" height="128" rx="28" fill="#071012" />
+    <path d="M30 92V36H46L64 62L82 36H98V92H84V58L68 82H60L44 58V92H30Z" fill="#f6f1e8" />
+    <path d="M64 62L82 36H98L68 82H60L30 36H46L64 62Z" fill="#7ff0d7" opacity="0.2" />
+</svg>

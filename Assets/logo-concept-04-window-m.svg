@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+    <title id="title">Logo concept 04 - window M</title>
+    <desc id="desc">A precise M hidden inside a window-like negative-space frame.</desc>
+    <rect width="128" height="128" rx="28" fill="#071012" />
+    <path d="M28 36H100V92H84V58L70 80H58L44 58V92H28V36Z" fill="#f6f1e8" />
+    <path d="M44 36L64 66L84 36H68L64 42L60 36H44Z" fill="#071012" />
+    <path d="M84 36H100V52H84V36Z" fill="#7ff0d7" />
+</svg>
