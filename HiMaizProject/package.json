@@ -5,7 +5,7 @@
     "description": "Personal coming-soon site for Maiz, built with Next.js and deployed on Vercel.",
     "packageManager": "npm@11.6.2",
     "engines": {
-        "node": ">=24.0.0"
+        "node": "24.x"
     },
     "scripts": {
         "dev": "next dev --webpack",
