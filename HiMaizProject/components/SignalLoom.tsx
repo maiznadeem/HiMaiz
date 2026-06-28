@@ -2,57 +2,156 @@
 
 import { useEffect, useRef } from "react";
 
-const codeMarks = ["01", "build", "ship", "craft", "{ }", "soon", "maiz", "init"];
+type PointerState = {
+    x: number;
+    y: number;
+    tx: number;
+    ty: number;
+    vx: number;
+    vy: number;
+    active: boolean;
+};
 
-function drawRibbon(
+function roundedRect(
+    context: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number,
+) {
+    const r = Math.min(radius, width / 2, height / 2);
+    context.beginPath();
+    context.moveTo(x + r, y);
+    context.arcTo(x + width, y, x + width, y + height, r);
+    context.arcTo(x + width, y + height, x, y + height, r);
+    context.arcTo(x, y + height, x, y, r);
+    context.arcTo(x, y, x + width, y, r);
+    context.closePath();
+}
+
+function drawUndertones(
     context: CanvasRenderingContext2D,
     width: number,
     height: number,
     time: number,
-    index: number,
-    pointer: { x: number; y: number; vx: number; vy: number; active: boolean },
+    pointer: PointerState,
 ) {
-    const hue = [176, 205, 44, 338][index % 4];
-    const yBase = height * (0.24 + index * 0.15);
-    const amplitude = height * (0.045 + index * 0.01);
-    const pullRadius = Math.min(width, height) * (0.34 + index * 0.025);
-    const pullStrength = pointer.active ? 0.48 - index * 0.045 : 0.12;
+    context.fillStyle = "#050606";
+    context.fillRect(0, 0, width, height);
 
-    const gradient = context.createLinearGradient(0, yBase - amplitude, width, yBase + amplitude);
-    gradient.addColorStop(0, `hsla(${hue}, 88%, 66%, 0)`);
-    gradient.addColorStop(0.2, `hsla(${hue}, 88%, 66%, 0.1)`);
-    gradient.addColorStop(0.52, `hsla(${hue + 22}, 92%, 72%, 0.24)`);
-    gradient.addColorStop(0.84, `hsla(${hue}, 88%, 66%, 0.08)`);
-    gradient.addColorStop(1, `hsla(${hue}, 88%, 66%, 0)`);
+    const ribCount = Math.max(10, Math.round(width / 120));
+    const ribWidth = width / ribCount;
+    const centerX = width * 0.66 + (pointer.x - width * 0.5) * 0.14;
+    const centerY = height * 0.51 + (pointer.y - height * 0.5) * 0.12;
+    const glowWidth = Math.max(width * 0.48, 520);
+    const glowHeight = Math.max(height * 0.34, 220);
 
-    context.strokeStyle = gradient;
-    context.lineWidth = 52 - index * 5;
-    context.beginPath();
+    context.save();
+    context.globalCompositeOperation = "screen";
+    context.filter = `blur(${Math.max(22, width * 0.025)}px)`;
+    const bloom = context.createRadialGradient(
+        centerX,
+        centerY,
+        0,
+        centerX,
+        centerY,
+        glowWidth * 0.68,
+    );
+    bloom.addColorStop(0, "rgba(255, 107, 70, 0.8)");
+    bloom.addColorStop(0.26, "rgba(255, 70, 32, 0.48)");
+    bloom.addColorStop(0.62, "rgba(155, 38, 13, 0.16)");
+    bloom.addColorStop(1, "rgba(0, 0, 0, 0)");
+    context.fillStyle = bloom;
+    context.fillRect(0, 0, width, height);
+    context.restore();
 
-    for (let x = -80; x <= width + 80; x += 28) {
-        const progress = x / width;
-        const restingY =
-            yBase +
-            Math.sin(progress * 6.2 + time * (0.72 + index * 0.08) + index) * amplitude +
-            Math.cos(progress * 10.5 - time * 0.45 + index * 2.2) * amplitude * 0.36;
-        const dx = pointer.x - x;
-        const dy = pointer.y - restingY;
-        const distance = Math.hypot(dx, dy);
-        const influence = Math.max(0, 1 - distance / pullRadius) ** 2;
-        const xPull = dx * influence * pullStrength * 0.18 + pointer.vx * influence * 0.62;
-        const yPull = dy * influence * pullStrength + pointer.vy * influence * 0.72;
-        const springRipple = Math.sin(distance * 0.026 - time * 4.2 + index) * influence * 16;
-        const y = restingY + yPull + springRipple;
-        const pulledX = x + xPull;
+    for (let index = 0; index < ribCount; index += 1) {
+        const x = index * ribWidth;
+        const ribCenter = x + ribWidth * 0.5;
+        const distance = Math.abs(ribCenter - centerX) / glowWidth;
+        const intensity = Math.max(0, 1 - distance) ** 1.55;
+        const ripple = Math.sin(time * 0.72 + index * 0.63) * height * 0.014;
+        const pointerWave =
+            Math.sin(index * 0.82 - time * 1.25) *
+            Math.max(0, 1 - Math.abs(ribCenter - pointer.x) / (ribWidth * 4.5)) *
+            pointer.vy *
+            0.42;
+        const litHeight = glowHeight * (0.7 + intensity * 0.42);
+        const top = centerY - litHeight * 0.5 + ripple + pointerWave;
+        const inset = Math.max(2, ribWidth * 0.08);
 
-        if (x === -80) {
-            context.moveTo(pulledX, y);
-        } else {
-            context.lineTo(pulledX, y);
-        }
+        context.save();
+        roundedRect(context, x + inset, top, ribWidth - inset * 2, litHeight, ribWidth * 0.2);
+        context.clip();
+
+        const verticalLight = context.createLinearGradient(0, top, 0, top + litHeight);
+        verticalLight.addColorStop(0, "rgba(20, 7, 3, 0)");
+        verticalLight.addColorStop(0.18, `rgba(109, 30, 14, ${intensity * 0.28})`);
+        verticalLight.addColorStop(0.42, `rgba(255, 92, 52, ${intensity * 0.94})`);
+        verticalLight.addColorStop(0.68, `rgba(222, 61, 31, ${intensity * 0.76})`);
+        verticalLight.addColorStop(1, "rgba(16, 5, 2, 0)");
+        context.fillStyle = verticalLight;
+        context.fillRect(x, top, ribWidth, litHeight);
+
+        const glass = context.createLinearGradient(x, 0, x + ribWidth, 0);
+        glass.addColorStop(0, "rgba(0, 0, 0, 0.88)");
+        glass.addColorStop(0.14, `rgba(255, 76, 26, ${intensity * 0.19})`);
+        glass.addColorStop(0.42, `rgba(255, 207, 166, ${intensity * 0.16})`);
+        glass.addColorStop(0.72, "rgba(4, 8, 10, 0.58)");
+        glass.addColorStop(0.9, "rgba(0, 0, 0, 0.95)");
+        glass.addColorStop(1, "rgba(3, 9, 12, 1)");
+        context.fillStyle = glass;
+        context.fillRect(x, top, ribWidth, litHeight);
+        context.restore();
+
+        const ribShade = context.createLinearGradient(x, 0, x + ribWidth, 0);
+        ribShade.addColorStop(0, "rgba(0, 0, 0, 0.94)");
+        ribShade.addColorStop(0.12, "rgba(255, 255, 255, 0.025)");
+        ribShade.addColorStop(0.48, "rgba(255, 255, 255, 0)");
+        ribShade.addColorStop(0.82, "rgba(0, 0, 0, 0.34)");
+        ribShade.addColorStop(0.96, "rgba(0, 0, 0, 0.9)");
+        ribShade.addColorStop(1, "rgba(58, 108, 128, 0.09)");
+        context.fillStyle = ribShade;
+        context.fillRect(x, 0, ribWidth, height);
+
+        context.fillStyle = "rgba(128, 188, 205, 0.035)";
+        context.fillRect(x + ribWidth - 1, 0, 1, height);
     }
 
-    context.stroke();
+    context.save();
+    context.globalAlpha = 0.1;
+    for (let y = 0; y < height; y += 3) {
+        const wave = Math.sin(y * 0.08 + time * 0.9) * 0.5 + 0.5;
+        context.fillStyle = `rgba(255, 124, 82, ${0.012 + wave * 0.018})`;
+        context.fillRect(0, y, width, 1);
+    }
+    context.restore();
+
+    context.save();
+    context.globalAlpha = 0.12;
+    for (let i = 0; i < Math.floor((width * height) / 340); i += 1) {
+        const x = (i * 71.37 + time * 18) % width;
+        const y = (i * 37.91 + time * 11) % height;
+        const value = 110 + ((i * 29) % 90);
+        context.fillStyle = `rgb(${value}, ${value * 0.74}, ${value * 0.62})`;
+        context.fillRect(x, y, 0.7, 0.7);
+    }
+    context.restore();
+
+    const vignette = context.createRadialGradient(
+        centerX,
+        centerY,
+        Math.min(width, height) * 0.12,
+        width * 0.5,
+        height * 0.5,
+        Math.max(width, height) * 0.75,
+    );
+    vignette.addColorStop(0, "rgba(0, 0, 0, 0)");
+    vignette.addColorStop(0.54, "rgba(0, 0, 0, 0.08)");
+    vignette.addColorStop(1, "rgba(0, 0, 0, 0.72)");
+    context.fillStyle = vignette;
+    context.fillRect(0, 0, width, height);
 }
 
 export function SignalLoom() {
@@ -62,15 +161,15 @@ export function SignalLoom() {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const context = canvas.getContext("2d", { alpha: true });
+        const context = canvas.getContext("2d", { alpha: false });
         if (!context) return;
 
         const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const pointer = {
-            x: window.innerWidth * 0.68,
-            y: window.innerHeight * 0.42,
-            tx: window.innerWidth * 0.68,
-            ty: window.innerHeight * 0.42,
+        const pointer: PointerState = {
+            x: window.innerWidth * 0.66,
+            y: window.innerHeight * 0.5,
+            tx: window.innerWidth * 0.66,
+            ty: window.innerHeight * 0.5,
             vx: 0,
             vy: 0,
             active: false,
@@ -80,7 +179,7 @@ export function SignalLoom() {
         let animationId = 0;
 
         const resize = () => {
-            const ratio = Math.min(window.devicePixelRatio || 1, 2);
+            const ratio = Math.min(window.devicePixelRatio || 1, 1.75);
             const width = window.innerWidth;
             const height = window.innerHeight;
             canvas.width = Math.floor(width * ratio);
@@ -98,116 +197,19 @@ export function SignalLoom() {
 
         const leave = () => {
             pointer.active = false;
-            pointer.tx = window.innerWidth * 0.68;
-            pointer.ty = window.innerHeight * 0.42;
+            pointer.tx = window.innerWidth * 0.66;
+            pointer.ty = window.innerHeight * 0.5;
         };
 
         const draw = () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            const time = frame * 0.012;
-            const isCompact = width < 720;
-
-            const stiffness = pointer.active ? 0.028 : 0.018;
-            const damping = pointer.active ? 0.82 : 0.86;
+            const stiffness = pointer.active ? 0.024 : 0.012;
+            const damping = pointer.active ? 0.84 : 0.89;
             pointer.vx = (pointer.vx + (pointer.tx - pointer.x) * stiffness) * damping;
             pointer.vy = (pointer.vy + (pointer.ty - pointer.y) * stiffness) * damping;
             pointer.x += pointer.vx;
             pointer.y += pointer.vy;
 
-            context.clearRect(0, 0, width, height);
-
-            const base = context.createLinearGradient(0, 0, width, height);
-            base.addColorStop(0, "#07151a");
-            base.addColorStop(0.42, "#11161d");
-            base.addColorStop(1, "#211219");
-            context.fillStyle = base;
-            context.fillRect(0, 0, width, height);
-
-            context.save();
-            context.globalCompositeOperation = "screen";
-            context.filter = "blur(22px)";
-            context.globalAlpha = isCompact ? 0.62 : 1;
-            for (let i = 0; i < 4; i += 1) {
-                drawRibbon(context, width, height, time, i, pointer);
-            }
-            context.restore();
-
-            context.save();
-            context.globalCompositeOperation = "lighter";
-            context.filter = "blur(1px)";
-            context.globalAlpha = isCompact ? 0.52 : 1;
-            for (let i = 0; i < 4; i += 1) {
-                drawRibbon(context, width, height, time + 0.4, i, pointer);
-            }
-            context.restore();
-
-            const lensRadius = Math.min(width, height) * (pointer.active ? 0.28 : 0.21);
-            const lens = context.createRadialGradient(
-                pointer.x,
-                pointer.y,
-                0,
-                pointer.x,
-                pointer.y,
-                lensRadius,
-            );
-            lens.addColorStop(0, "rgba(255, 248, 238, 0.17)");
-            lens.addColorStop(0.28, "rgba(132, 245, 218, 0.11)");
-            lens.addColorStop(0.62, "rgba(255, 111, 145, 0.055)");
-            lens.addColorStop(1, "rgba(255, 248, 238, 0)");
-            context.fillStyle = lens;
-            context.fillRect(0, 0, width, height);
-
-            context.save();
-            context.globalAlpha = 0.16;
-            context.strokeStyle = "rgba(255, 248, 238, 0.5)";
-            context.lineWidth = 1;
-            for (let i = 0; i < 9; i += 1) {
-                const radius = lensRadius * (0.18 + i * 0.085);
-                context.beginPath();
-                context.ellipse(
-                    pointer.x + Math.sin(time + i) * 10,
-                    pointer.y + Math.cos(time * 0.7 + i) * 8,
-                    radius * 1.34,
-                    radius * 0.48,
-                    time * 0.12 + i * 0.34,
-                    0,
-                    Math.PI * 2,
-                );
-                context.stroke();
-            }
-            context.restore();
-
-            context.save();
-            context.font = "12px Geist Mono, ui-monospace, monospace";
-            context.textBaseline = "middle";
-            for (let i = 0; i < 28; i += 1) {
-                const column = (i * 0.137 + time * 0.012) % 1;
-                const x = column * width;
-                const y =
-                    (height * (0.12 + ((i * 29) % 76) / 100) + Math.sin(time + i) * 18) % height;
-                context.fillStyle = `rgba(255, 248, 238, ${0.035 + (i % 4) * 0.016})`;
-                context.fillText(codeMarks[i % codeMarks.length], x, y);
-            }
-            context.restore();
-
-            context.fillStyle = "rgba(255, 252, 244, 0.032)";
-            for (let y = 0; y < height; y += 6) {
-                context.fillRect(0, y, width, 1);
-            }
-
-            const vignette = context.createRadialGradient(
-                width * 0.46,
-                height * 0.46,
-                Math.min(width, height) * 0.2,
-                width * 0.46,
-                height * 0.46,
-                Math.max(width, height) * 0.72,
-            );
-            vignette.addColorStop(0, "rgba(0, 0, 0, 0)");
-            vignette.addColorStop(1, "rgba(0, 0, 0, 0.42)");
-            context.fillStyle = vignette;
-            context.fillRect(0, 0, width, height);
+            drawUndertones(context, window.innerWidth, window.innerHeight, frame * 0.012, pointer);
 
             frame += 1;
             if (!reduced) animationId = window.requestAnimationFrame(draw);
