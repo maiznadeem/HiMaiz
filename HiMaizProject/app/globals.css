@@ -32,6 +32,25 @@ body {
     font-family: var(--font-space-grotesk), "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
 }
 
+.site-shell {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.site-frame {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+}
+
+@supports (height: 100dvh) {
+    .site-shell {
+        height: 100dvh;
+        min-height: 100dvh;
+    }
+}
+
 ::selection {
     background: rgba(132, 245, 218, 0.28);
     color: var(--ink);
@@ -290,6 +309,29 @@ p {
 }
 
 @media (max-width: 720px) {
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+    }
+
+    .site-frame {
+        padding-top: max(1rem, env(safe-area-inset-top));
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .site-content {
+        flex: 1;
+        min-height: 0;
+        align-content: end;
+        gap: 1.5rem;
+        gap: clamp(1rem, 3dvh, 2rem);
+        padding-top: 3rem;
+        padding-top: clamp(2.5rem, 8dvh, 5rem);
+        padding-bottom: 0;
+    }
+
     .hero-copy,
     .launch-panel,
     .signal-list {
@@ -337,6 +379,62 @@ p {
         border-top: 1px solid var(--line);
         padding-left: 0;
         padding-top: 1.25rem;
+    }
+}
+
+@media (max-width: 720px) and (max-height: 760px) {
+    .site-content {
+        gap: 0.85rem;
+        padding-top: 1rem;
+    }
+
+    .eyebrow {
+        font-size: 0.68rem;
+    }
+
+    .hero-title {
+        margin-top: 0.65rem;
+        font-size: clamp(2.2rem, 10.5vw, 2.72rem);
+        line-height: 0.94;
+    }
+
+    .hero-copy {
+        margin-top: 0.8rem;
+        font-size: 0.88rem;
+        line-height: 1.35;
+    }
+
+    .launch-panel {
+        gap: 0.65rem;
+        padding-top: 0.75rem;
+    }
+
+    .panel-label {
+        font-size: 0.66rem;
+    }
+
+    .panel-value {
+        margin-top: 0.2rem;
+        font-size: 0.9rem;
+    }
+
+    .signal-list {
+        gap: 0.35rem;
+    }
+
+    .signal-list span {
+        padding: 0.34rem 0.52rem;
+        font-size: 0.72rem;
+    }
+
+    .contact-link {
+        font-size: 0.74rem;
+    }
+}
+
+@media (max-width: 390px) and (max-height: 680px) {
+    .hero-copy {
+        display: none;
     }
 }
 

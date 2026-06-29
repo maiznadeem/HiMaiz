@@ -6,10 +6,10 @@ const signals = ["craft", "systems", "interfaces", "stories"];
 
 export default function Home() {
     return (
-        <main className="relative min-h-dvh overflow-hidden bg-[var(--page-bg)] text-[var(--ink)]">
+        <main className="site-shell relative overflow-hidden bg-[var(--page-bg)] text-[var(--ink)]">
             <SignalLoom />
 
-            <section className="relative z-10 flex min-h-dvh flex-col justify-between px-5 py-5 sm:px-8 sm:py-7 lg:px-12">
+            <section className="site-frame relative z-10 flex flex-col justify-between px-5 py-5 sm:px-8 sm:py-7 lg:px-12">
                 <header className="flex items-center justify-between gap-4">
                     <Link className="brand-lockup" href="/" aria-label="Maiz home">
                         <span className="brand-mark" aria-hidden="true">
@@ -28,7 +28,7 @@ export default function Home() {
                     </div>
                 </header>
 
-                <div className="grid min-w-0 items-end gap-12 pb-8 pt-24 lg:grid-cols-[minmax(0,1fr)_360px] lg:pb-12 lg:pt-28">
+                <div className="site-content grid min-w-0 items-end gap-12 pb-8 pt-24 lg:grid-cols-[minmax(0,1fr)_360px] lg:pb-12 lg:pt-28">
                     <div className="min-w-0 max-w-5xl">
                         <p className="eyebrow">personal site in progress</p>
                         <h1
