@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
@@ -13,14 +13,21 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    viewportFit: "cover",
+    themeColor: "#101112",
+};
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://himaiz.com"),
     title: {
-        default: "Maiz | Coming Soon",
-        template: "%s | Maiz",
+        default: "Maiz Nadeem | A Personal Space, Taking Shape",
+        template: "%s | Maiz Nadeem",
     },
     description:
-        "A personal website for Maiz is taking shape. Something thoughtful, animated, and useful is coming soon.",
+        "Thoughtful code. Curious experiments. A new home for everything in between. The personal website of Maiz Nadeem, coming soon.",
     applicationName: "HiMaiz",
     authors: [{ name: "Maiz" }],
     creator: "Maiz",
@@ -42,9 +49,9 @@ export const metadata: Metadata = {
         apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
     },
     openGraph: {
-        title: "Maiz | Coming Soon",
+        title: "Maiz Nadeem | A Personal Space, Taking Shape",
         description:
-            "A personal website for Maiz is taking shape. Something thoughtful, animated, and useful is coming soon.",
+            "Thoughtful code. Curious experiments. A new home for everything in between. Coming soon.",
         url: "https://himaiz.com",
         siteName: "HiMaiz",
         images: [
@@ -60,8 +67,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Maiz | Coming Soon",
-        description: "A personal website for Maiz is taking shape.",
+        title: "Maiz Nadeem | A Personal Space, Taking Shape",
+        description: "Thoughtful code. Curious experiments. A personal space, taking shape.",
         images: ["/opengraph-image"],
     },
     robots: {

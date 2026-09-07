@@ -1,0 +1,9 @@
+# Only upload the website project, not local tools or branding source archives.
+/*
+!/HiMaizProject/
+/HiMaizProject/node_modules/
+/HiMaizProject/.next/
+/HiMaizProject/.vercel/
+/HiMaizProject/.env*
+/HiMaizProject/*.log
+/HiMaizProject/*.tsbuildinfo
