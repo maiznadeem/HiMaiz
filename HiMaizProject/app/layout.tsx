@@ -1,23 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Fraunces } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-    variable: "--font-space-grotesk",
+const fraunces = Fraunces({
     subsets: ["latin"],
+    axes: ["SOFT", "WONK", "opsz"],
+    variable: "--font-fraunces",
     display: "swap",
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
 });
 
 export const viewport: Viewport = {
     width: "device-width",
     initialScale: 1,
     viewportFit: "cover",
-    themeColor: "#101112",
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: "#e7e7e2" },
+        { media: "(prefers-color-scheme: dark)", color: "#22211e" },
+    ],
 };
 
 export const metadata: Metadata = {
@@ -46,7 +45,6 @@ export const metadata: Metadata = {
     ],
     icons: {
         icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-        apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
     },
     openGraph: {
         title: "Maiz Nadeem | A Personal Space, Taking Shape",
@@ -91,7 +89,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable} h-full`}>
+        <html lang="en" className={`${fraunces.variable} h-full`}>
             <body className="min-h-full antialiased">{children}</body>
         </html>
     );
