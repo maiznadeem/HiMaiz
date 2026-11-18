@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces } from "next/font/google";
 import { PaperFilter } from "@/components/PaperFilter";
-import { TAGLINE } from "@/lib/site";
+import { RSS_ALTERNATE, TAGLINE } from "@/lib/site";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     publisher: "Maiz",
     alternates: {
         canonical: "/",
-        types: { "application/rss+xml": "/log/rss.xml" },
+        types: RSS_ALTERNATE,
     },
     keywords: [
         "Maiz",
@@ -50,8 +50,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: "Maiz Nadeem | A Personal Space, Taking Shape",
-        description:
-            "Thoughtful code. Curious experiments. A new home for everything in between. Coming soon.",
+        description: TAGLINE,
         url: "https://himaiz.com",
         siteName: "HiMaiz",
         images: [
@@ -59,7 +58,7 @@ export const metadata: Metadata = {
                 url: "/opengraph-image",
                 width: 1200,
                 height: 630,
-                alt: "HiMaiz coming soon preview with the Monolith M mark",
+                alt: "Maiz Nadeem. A leaf and an orange pebble cut from paper.",
             },
         ],
         locale: "en_US",
@@ -68,7 +67,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Maiz Nadeem | A Personal Space, Taking Shape",
-        description: "Thoughtful code. Curious experiments. A personal space, taking shape.",
+        description: TAGLINE,
         images: ["/opengraph-image"],
     },
     robots: {

@@ -81,9 +81,9 @@ export function getLogEntries(options: LogOptions = {}): LogEntry[] {
     const dir = options.dir ?? path.join(/* turbopackIgnore: true */ process.cwd(), "content/log");
     const includeDrafts = options.includeDrafts ?? shouldIncludeDrafts();
     // Git does not track empty folders, so a missing directory means no entries.
-    if (!fs.existsSync(dir)) return [];
+    if (!fs.existsSync(/* turbopackIgnore: true */ dir)) return [];
     return fs
-        .readdirSync(dir)
+        .readdirSync(/* turbopackIgnore: true */ dir)
         .filter((file) => file.endsWith(".md") && !file.startsWith("."))
         .map((file) => parseEntry(dir, file))
         .filter((entry) => includeDrafts || !entry.draft)

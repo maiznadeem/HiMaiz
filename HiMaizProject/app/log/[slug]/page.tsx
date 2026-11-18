@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { formatFullDate } from "@/lib/dates";
 import { getLogEntries, getLogEntry, renderMarkdown } from "@/lib/log";
+import { RSS_ALTERNATE } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -25,7 +26,10 @@ async function findEntry(params: Props["params"]) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const entry = await findEntry(params);
-    return { title: entry.summary, alternates: { canonical: `/log/${entry.slug}` } };
+    return {
+        title: entry.summary,
+        alternates: { canonical: `/log/${entry.slug}`, types: RSS_ALTERNATE },
+    };
 }
 
 export default async function LogEntryPage({ params }: Props) {
