@@ -34,6 +34,7 @@ export const metadata: Metadata = {
     publisher: "Maiz",
     alternates: {
         canonical: "/",
+        types: { "application/rss+xml": "/log/rss.xml" },
     },
     keywords: [
         "Maiz",
