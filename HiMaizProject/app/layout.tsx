@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces } from "next/font/google";
 import { PaperFilter } from "@/components/PaperFilter";
+import { TAGLINE } from "@/lib/site";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -26,8 +27,7 @@ export const metadata: Metadata = {
         default: "Maiz Nadeem | A Personal Space, Taking Shape",
         template: "%s | Maiz Nadeem",
     },
-    description:
-        "Thoughtful code. Curious experiments. A new home for everything in between. The personal website of Maiz Nadeem, coming soon.",
+    description: TAGLINE,
     applicationName: "HiMaiz",
     authors: [{ name: "Maiz" }],
     creator: "Maiz",

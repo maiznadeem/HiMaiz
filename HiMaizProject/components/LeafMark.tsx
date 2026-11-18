@@ -13,7 +13,6 @@ export function LeafMark({ size = 28, flat = false, title }: LeafMarkProps) {
             viewBox="0 0 100 100"
             role={title ? "img" : undefined}
             aria-hidden={title ? undefined : true}
-            aria-label={title}
             focusable="false"
         >
             {title ? <title>{title}</title> : null}
