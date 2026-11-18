@@ -70,10 +70,7 @@ function parseEntry(dir: string, file: string): LogEntry {
     if (!result.success) {
         const issue = result.error.issues[0];
         const field = String(issue.path[0] ?? "frontmatter");
-        const problem =
-            issue.code === "invalid_type" && issue.input === undefined
-                ? "is required"
-                : issue.message;
+        const problem = data[field] === undefined ? "is required" : issue.message;
         throw new LogEntryError(file, field, problem);
     }
     const body = content.trim();
@@ -83,6 +80,8 @@ function parseEntry(dir: string, file: string): LogEntry {
 export function getLogEntries(options: LogOptions = {}): LogEntry[] {
     const dir = options.dir ?? path.join(process.cwd(), "content/log");
     const includeDrafts = options.includeDrafts ?? shouldIncludeDrafts();
+    // Git does not track empty folders, so a missing directory means no entries.
+    if (!fs.existsSync(dir)) return [];
     return fs
         .readdirSync(dir)
         .filter((file) => file.endsWith(".md") && !file.startsWith("."))

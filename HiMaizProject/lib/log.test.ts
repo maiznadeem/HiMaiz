@@ -50,6 +50,13 @@ describe("getLogEntries", () => {
         expect(run).toThrow(LogEntryError);
         expect(run).toThrow(file);
         expect(run).toThrow(field);
+        if (name === "missing-date") expect(run).toThrow("date is required");
+    });
+});
+
+describe("missing directory", () => {
+    it("returns no entries", () => {
+        expect(getLogEntries({ dir: fixture("does-not-exist"), includeDrafts: true })).toEqual([]);
     });
 });
 
