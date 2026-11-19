@@ -22,8 +22,14 @@ Hand-drawn ink sits on top of the paper: a dashed flight trail, pops, drop lines
 stem in the hero (`PaperArt`), an orange scribble under the headline (`InkUnderline`) and
 wobbly rules (`InkRule`). Each line draws itself in once on load. The hero ink "boils" by
 cycling three roughened copies of itself (the `#ink-N` filters in `PaperFilter`), like
-frame-by-frame hand animation. All of it is CSS, and with reduced motion everything shows
-finished and still.
+frame-by-frame hand animation.
+
+The paper pieces have their own motion (`Piece` in `PaperArt`). On load the backdrop is laid
+down, the leaves sprout from the stem, the pebble drops and bounces, and the dot pops in where
+the trail ends. After that the leaves sway, the pebble rocks and the dot floats. Hovering over
+or tapping a piece rustles a leaf, hops the pebble or bounces the dot (`Poke`). All of it is CSS,
+apart from `Poke`, which only switches a data attribute on and off. With reduced motion,
+everything shows finished and still.
 
 ## Identity
 

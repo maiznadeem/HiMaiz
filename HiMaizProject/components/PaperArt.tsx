@@ -1,4 +1,6 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
+
+import { Poke } from "./Poke";
 
 const LEAF = "M18 82C16 50 34 20 76 14 82 46 62 78 18 82Z";
 const VEIN = "M23 77C40 58 54 40 71 20";
@@ -19,9 +21,54 @@ const tint = (percent: number) => ({
     fill: `color-mix(in srgb, var(--muted) ${percent}%, var(--stone))`,
 });
 
-// Each piece is two groups: the outer one animates in on load (see .piece in globals.css), the
-// inner one carries the paper filter, so the animation never replaces the paper edge and shadow.
-const piece = (i: number) => ({ "--i": i }) as CSSProperties;
+const startAt = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
+// Where each leaf meets the stem, in svg units: the point the leaves sprout, sway and rustle around.
+const LOGO_STEM = [232, 408];
+const SIDE_STEM = [220, 400];
+
+type Motion = "lay" | "sprout" | "drop" | "pop";
+
+/**
+ * One cut piece, in layers so its animations never fight over one transform (see globals.css):
+ * - the outer group enters once on load, starting at `start` ms;
+ * - the next one moves gently forever after (leaves sway, the pebble rocks, the dot floats);
+ * - the next one reacts when poked (leaves rustle, the pebble hops, the dot bounces);
+ * - the inner one carries the #paper filter, so motion never replaces the paper edge and shadow.
+ */
+function Piece({
+    motion,
+    start,
+    stem,
+    sway = [0, 0],
+    children,
+}: {
+    motion: Motion;
+    start: number;
+    stem?: number[];
+    /** How far, in degrees, and how slowly, in seconds, a leaf sways. */
+    sway?: [number, number];
+    children: ReactNode;
+}) {
+    const paper = <g filter="url(#paper)">{children}</g>;
+    const vars = {
+        ...startAt(start),
+        ...(stem && { "--ox": `${stem[0]}px`, "--oy": `${stem[1]}px` }),
+        "--sway": `${sway[0]}deg`,
+        "--sway-t": `${sway[1]}s`,
+    } as CSSProperties;
+    return (
+        <g className={`piece enter-${motion}`} style={vars}>
+            {motion === "lay" ? (
+                paper
+            ) : (
+                <g className={`idle idle-${motion}`}>
+                    <Poke className={`poke poke-${motion}`}>{paper}</Poke>
+                </g>
+            )}
+        </g>
+    );
+}
 
 // Hand-drawn ink marks over the paper, in svg units. Each draws itself in after the pieces land
 // (--d is its start, see .ink-line in globals.css). Several strokes in one path draw in turn.
@@ -29,17 +76,15 @@ const TRAIL =
     "M452 128C462 96 452 64 424 56 396 48 378 70 392 84 406 98 428 80 412 62 386 34 306 30 246 40 206 47 182 60 170 72";
 const MARKS = [
     // The pebble's drop lines, as if it had just fallen into place.
-    { d: "M466 292 462 279M481 289 482 275M495 296 501 284", at: 1050 },
+    { d: "M466 292 462 279M481 289 482 275M495 296 501 284", at: 1330 },
     // Pops around the small dot where the trail ends.
-    { d: "M133 71 122 60M151 63 150 48M131 92 116 95", at: 1700 },
-    // A curled stem under the two leaves.
+    { d: "M133 71 122 60M151 63 150 48M131 92 116 95", at: 1900 },
+    // A curled stem under the two leaves. It draws first and the leaves sprout from it.
     {
         d: "M228 404C222 420 206 430 188 428 172 426 170 410 182 408 194 406 197 421 185 430",
-        at: 1350,
+        at: 120,
     },
 ];
-const startAt = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
-
 /** The hero composition: the logo's leaf and pebble scaled up, with a few more cut pieces. */
 export function PaperArt({ className }: { className?: string }) {
     return (
@@ -82,7 +127,7 @@ export function PaperArt({ className }: { className?: string }) {
                 >
                     <path
                         className="ink-line"
-                        style={startAt(950)}
+                        style={startAt(1250)}
                         d={TRAIL}
                         pathLength={1}
                         stroke="white"
@@ -92,35 +137,26 @@ export function PaperArt({ className }: { className?: string }) {
                     />
                 </mask>
             </defs>
-            <g className="piece" style={piece(0)}>
-                <g filter="url(#paper)">
-                    <circle cx={138 * GRID} cy={100 * GRID} r={76 * GRID} style={tint(18)} />
+            <Piece motion="lay" start={0}>
+                <circle cx={138 * GRID} cy={100 * GRID} r={76 * GRID} style={tint(18)} />
+            </Piece>
+            <Piece motion="sprout" start={420} stem={SIDE_STEM} sway={[-2.4, 6.4]}>
+                <path d={LEAF} transform={SIDE_LEAF} style={tint(45)} />
+            </Piece>
+            <Piece motion="sprout" start={560} stem={LOGO_STEM} sway={[1.6, 5.4]}>
+                <g mask="url(#paper-art-vein)">
+                    <path d={LEAF} transform={LOGO} fill="var(--ink)" />
                 </g>
-            </g>
-            <g className="piece" style={piece(1)}>
-                <g filter="url(#paper)">
-                    <path d={LEAF} transform={SIDE_LEAF} style={tint(45)} />
-                </g>
-            </g>
-            <g className="piece" style={piece(2)}>
-                <g filter="url(#paper)">
-                    <g mask="url(#paper-art-vein)">
-                        <path d={LEAF} transform={LOGO} fill="var(--ink)" />
-                    </g>
-                </g>
-            </g>
-            <g className="piece" style={piece(3)}>
-                <g filter="url(#paper)">
-                    <path d={PEBBLE} transform={LOGO} fill="var(--orange)" />
-                </g>
-            </g>
-            <g className="piece" style={piece(4)}>
-                <g filter="url(#paper)">
-                    <circle cx={76 * GRID} cy={44 * GRID} r={6 * GRID} fill="var(--orange)" />
-                </g>
-            </g>
+            </Piece>
+            <Piece motion="drop" start={880}>
+                <path d={PEBBLE} transform={LOGO} fill="var(--orange)" />
+            </Piece>
+            <Piece motion="pop" start={1720}>
+                <circle cx={76 * GRID} cy={44 * GRID} r={6 * GRID} fill="var(--orange)" />
+            </Piece>
             <g
                 className="ink"
+                pointerEvents="none"
                 fill="none"
                 stroke="var(--ink)"
                 strokeWidth="2.6"
