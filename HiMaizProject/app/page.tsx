@@ -8,7 +8,7 @@ import { TAGLINE } from "@/lib/site";
 export default function Home() {
     const entries = getLogEntries();
     return (
-        <div className="mx-auto flex min-h-dvh max-w-6xl flex-col px-[var(--gutter)]">
+        <div className="mx-auto flex min-h-dvh max-w-6xl flex-col page-pad">
             <SiteHeader />
             <main className="flex-1">
                 <section className="grid items-center gap-x-12 gap-y-10 pt-10 pb-16 md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] md:pt-16 md:pb-20">

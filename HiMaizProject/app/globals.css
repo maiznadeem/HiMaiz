@@ -4,7 +4,7 @@
     --stone: #e7e7e2;
     --ink: #191919;
     --orange: #ff4f1a;
-    --muted: #6b6b66;
+    --muted: #5f5f5a;
     --paper-shadow: rgba(0, 0, 0, 0.22);
     --gutter: clamp(1.25rem, 5vw, 3rem);
     color-scheme: light dark;
@@ -40,6 +40,12 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Page wrapper: the gutter, widened where a notch or home indicator takes space (viewportFit: cover). */
+.page-pad {
+    padding-inline: max(var(--gutter), env(safe-area-inset-left), env(safe-area-inset-right));
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
 .display {
     font-weight: 700;
     font-variation-settings:
@@ -63,7 +69,9 @@ body {
 
 :focus-visible {
     outline: 3px solid var(--orange);
-    outline-offset: 3px;
+    outline-offset: 2px;
+    /* Orange alone is under 3:1 on stone; a 1px ink ring inside it carries the contrast. */
+    box-shadow: 0 0 0 1px var(--ink);
 }
 
 .prose {
@@ -90,7 +98,14 @@ body {
     font-size: 1.25rem;
 }
 
-.prose :is(h2, h3) + * {
+.prose h4 {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.3;
+    margin-top: 1.75em;
+}
+
+.prose :is(h2, h3, h4) + * {
     margin-top: 0.75em;
 }
 
@@ -135,6 +150,7 @@ body {
     background: color-mix(in srgb, var(--ink) 8%, transparent);
     border-radius: 0.25rem;
     padding: 0.1em 0.35em;
+    overflow-wrap: anywhere;
 }
 
 .prose pre {

@@ -37,7 +37,7 @@ export default async function OpenGraphImage() {
                 >
                     Building things, and writing it down.
                 </span>
-                <span style={{ fontSize: 30, color: "#6b6b66", marginTop: 40 }}>himaiz.com</span>
+                <span style={{ fontSize: 30, color: "#5f5f5a", marginTop: 40 }}>himaiz.com</span>
             </div>
             <LeafPebble size={380} />
         </div>,

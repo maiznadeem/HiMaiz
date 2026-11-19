@@ -22,7 +22,7 @@ with `prefers-color-scheme`.
 | Stone  | `#e7e7e2` | `#22211e` |
 | Ink    | `#191919` | `#ecebe5` |
 | Orange | `#ff4f1a` | `#ff6a3d` |
-| Muted  | `#6b6b66` | `#a3a29a` |
+| Muted  | `#5f5f5a` | `#a3a29a` |
 
 Orange is for shapes, rules and focus rings only, never body-size text (contrast about 2.9:1).
 
