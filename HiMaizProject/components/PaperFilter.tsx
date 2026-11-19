@@ -19,6 +19,30 @@ export function PaperFilter() {
                         style={{ floodColor: "var(--paper-shadow)" }}
                     />
                 </filter>
+                {/* Ink: three roughened versions of the same line. Cycling between them makes
+                    hand-drawn marks "boil" like frame-by-frame animation (see .ink in globals.css).
+                    The region is in PaperArt's units, because a straight line has a zero-height
+                    bounding box. */}
+                {[3, 11, 23].map((seed, i) => (
+                    <filter
+                        key={seed}
+                        id={`ink-${i}`}
+                        filterUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width="600"
+                        height="500"
+                    >
+                        <feTurbulence
+                            type="fractalNoise"
+                            baseFrequency="0.07"
+                            numOctaves="2"
+                            seed={seed}
+                            result="n"
+                        />
+                        <feDisplacementMap in="SourceGraphic" in2="n" scale="3" />
+                    </filter>
+                ))}
             </defs>
         </svg>
     );

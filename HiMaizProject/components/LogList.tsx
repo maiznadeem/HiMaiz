@@ -1,11 +1,13 @@
 import Link from "next/link";
+import { InkRule } from "@/components/InkRule";
 import { formatMonth } from "@/lib/dates";
 import type { LogEntry } from "@/lib/log";
 
 export function LogList({ entries }: { entries: LogEntry[] }) {
     if (entries.length === 0) return null;
     return (
-        <section aria-labelledby="log-heading" className="border-t-2 border-ink pt-5">
+        <section aria-labelledby="log-heading">
+            <InkRule draw className="mb-4 text-ink [--d:1100ms] [--rule-weight:2.5px]" />
             <h2 id="log-heading" className="sr-only">
                 Work log
             </h2>

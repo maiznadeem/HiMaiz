@@ -23,6 +23,23 @@ const tint = (percent: number) => ({
 // inner one carries the paper filter, so the animation never replaces the paper edge and shadow.
 const piece = (i: number) => ({ "--i": i }) as CSSProperties;
 
+// Hand-drawn ink marks over the paper, in svg units. Each draws itself in after the pieces land
+// (--d is its start, see .ink-line in globals.css). Several strokes in one path draw in turn.
+const TRAIL =
+    "M452 128C462 96 452 64 424 56 396 48 378 70 392 84 406 98 428 80 412 62 386 34 306 30 246 40 206 47 182 60 170 72";
+const MARKS = [
+    // The pebble's drop lines, as if it had just fallen into place.
+    { d: "M466 292 462 279M481 289 482 275M495 296 501 284", at: 1050 },
+    // Pops around the small dot where the trail ends.
+    { d: "M133 71 122 60M151 63 150 48M131 92 116 95", at: 1700 },
+    // A curled stem under the two leaves.
+    {
+        d: "M228 404C222 420 206 430 188 428 172 426 170 410 182 408 194 406 197 421 185 430",
+        at: 1350,
+    },
+];
+const startAt = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
 /** The hero composition: the logo's leaf and pebble scaled up, with a few more cut pieces. */
 export function PaperArt({ className }: { className?: string }) {
     return (
@@ -54,6 +71,26 @@ export function PaperArt({ className }: { className?: string }) {
                         fill="none"
                     />
                 </mask>
+                {/* The dashed trail draws in through a solid copy of itself. */}
+                <mask
+                    id="paper-art-trail"
+                    maskUnits="userSpaceOnUse"
+                    x="0"
+                    y="0"
+                    width="560"
+                    height="480"
+                >
+                    <path
+                        className="ink-line"
+                        style={startAt(950)}
+                        d={TRAIL}
+                        pathLength={1}
+                        stroke="white"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        fill="none"
+                    />
+                </mask>
             </defs>
             <g className="piece" style={piece(0)}>
                 <g filter="url(#paper)">
@@ -81,6 +118,25 @@ export function PaperArt({ className }: { className?: string }) {
                 <g filter="url(#paper)">
                     <circle cx={76 * GRID} cy={44 * GRID} r={6 * GRID} fill="var(--orange)" />
                 </g>
+            </g>
+            <g
+                className="ink"
+                fill="none"
+                stroke="var(--ink)"
+                strokeWidth="2.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            >
+                <path d={TRAIL} strokeDasharray="5 8" mask="url(#paper-art-trail)" />
+                {MARKS.map((mark) => (
+                    <path
+                        key={mark.d}
+                        className="ink-line"
+                        style={startAt(mark.at)}
+                        d={mark.d}
+                        pathLength={1}
+                    />
+                ))}
             </g>
         </svg>
     );

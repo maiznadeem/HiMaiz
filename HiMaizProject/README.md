@@ -18,6 +18,13 @@ Vercel.
 There is no 3D, canvas, analytics or animation library. The paper look is SVG
 shapes with an SVG filter and CSS.
 
+Hand-drawn ink sits on top of the paper: a dashed flight trail, pops, drop lines and a curled
+stem in the hero (`PaperArt`), an orange scribble under the headline (`InkUnderline`) and
+wobbly rules (`InkRule`). Each line draws itself in once on load. The hero ink "boils" by
+cycling three roughened copies of itself (the `#ink-N` filters in `PaperFilter`), like
+frame-by-frame hand animation. All of it is CSS, and with reduced motion everything shows
+finished and still.
+
 ## Identity
 
 A warm paper cut-out look: a leaf and a pebble, cut from paper, on stone.
