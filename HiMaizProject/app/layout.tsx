@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces } from "next/font/google";
 import { PaperFilter } from "@/components/PaperFilter";
-import { RSS_ALTERNATE, TAGLINE } from "@/lib/site";
+import { OPEN_GRAPH_BASE, RSS_ALTERNATE, TAGLINE } from "@/lib/site";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -49,19 +49,10 @@ export const metadata: Metadata = {
         icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     },
     openGraph: {
+        ...OPEN_GRAPH_BASE,
         title: "Maiz Nadeem | A Personal Space, Taking Shape",
         description: TAGLINE,
         url: "https://himaiz.com",
-        siteName: "HiMaiz",
-        images: [
-            {
-                url: "/opengraph-image",
-                width: 1200,
-                height: 630,
-                alt: "Maiz Nadeem. A leaf and an orange pebble cut from paper.",
-            },
-        ],
-        locale: "en_US",
         type: "website",
     },
     twitter: {

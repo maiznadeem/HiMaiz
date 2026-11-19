@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
     devIndicators: false,
     reactStrictMode: true,
     poweredByHeader: false,
+    async redirects() {
+        return [{ source: "/log", destination: "/", permanent: false }];
+    },
     async headers() {
         return [
             {

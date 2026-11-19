@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { formatFullDate } from "@/lib/dates";
 import { getLogEntries, getLogEntry, renderMarkdown } from "@/lib/log";
-import { RSS_ALTERNATE } from "@/lib/site";
+import { entryMetadata } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -26,23 +26,20 @@ async function findEntry(params: Props["params"]) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const entry = await findEntry(params);
-    return {
-        title: entry.summary,
-        alternates: { canonical: `/log/${entry.slug}`, types: RSS_ALTERNATE },
-    };
+    return entryMetadata(entry);
 }
 
 export default async function LogEntryPage({ params }: Props) {
     const entry = await findEntry(params);
     return (
-        <div className="mx-auto flex min-h-dvh max-w-6xl flex-col px-[var(--gutter)]">
+        <div className="mx-auto flex min-h-dvh max-w-6xl flex-col page-pad">
             <SiteHeader />
             <main className="flex-1 pt-8 pb-8 md:pt-14">
                 <article>
                     <time className="text-muted" dateTime={entry.date}>
                         {formatFullDate(entry.date)}
                     </time>
-                    <h1 className="display mt-3 max-w-[22ch] text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.08] text-balance">
+                    <h1 className="display mt-3 max-w-[22ch] [overflow-wrap:anywhere] text-[clamp(2rem,4.6vw,3.5rem)] leading-[1.08] text-balance">
                         {entry.summary}
                     </h1>
                     <div
