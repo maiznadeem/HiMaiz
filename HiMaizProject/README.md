@@ -27,7 +27,7 @@ A warm paper cut-out look: a leaf and a pebble, cut from paper, on stone.
 | stone  | `#e7e7e2` | `#22211e` |
 | ink    | `#191919` | `#ecebe5` |
 | orange | `#ff4f1a` | `#ff6a3d` |
-| muted  | `#6b6b66` | `#a3a29a` |
+| muted  | `#5f5f5a` | `#a3a29a` |
 
 Dark values apply under `prefers-color-scheme: dark`. Orange is for shapes,
 rules, focus rings and large display type, never body-size text.
@@ -75,7 +75,8 @@ Each entry is a Markdown file in `content/log/`.
 
 **File name.** The name is the entry's URL slug, so `my-entry.md` becomes
 `/log/my-entry`. Use lowercase letters, digits and hyphens only. A name such as
-`My Entry.md` or `foo_bar.md` fails the build and the error names the file.
+`My Entry.md` or `foo_bar.md` fails the build and the error names the file. So
+does a `.MD` or `.markdown` extension: use a lowercase `.md` file name.
 
 **Frontmatter.** `date` and `summary` are required; `draft` is optional and
 defaults to `false`.
@@ -91,6 +92,7 @@ Optional body in Markdown. Leave it empty for a one-line entry.
 ```
 
 - `date` is a real calendar date, `YYYY-MM-DD`.
+- Body headings start at `##`. The summary is the page's `h1`, so a `#` in the body is rendered as `##`.
 - `summary` is one line of plain text. It is the text shown in the log, the
   entry page title and the RSS item title.
 

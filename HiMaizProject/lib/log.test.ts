@@ -45,6 +45,8 @@ describe("getLogEntries", () => {
         ["bad-date", "entry.md", "date"],
         ["empty-summary", "entry.md", "summary"],
         ["bad-slug", "My Entry.md", "slug"],
+        ["bad-ext-upper", "Entry.MD", "lowercase .md"],
+        ["bad-ext-markdown", "entry.markdown", "lowercase .md"],
     ])("throws for %s", (name, file, field) => {
         const run = () => getLogEntries({ dir: fixture(name), includeDrafts: true });
         expect(run).toThrow(LogEntryError);
@@ -88,5 +90,20 @@ describe("renderMarkdown", () => {
     it("renders markdown", () => {
         expect(renderMarkdown("A & B")).toContain("A &amp; B");
         expect(renderMarkdown("**bold**")).toContain("<strong>bold</strong>");
+    });
+
+    it("demotes h1 to h2 so the page keeps a single h1", () => {
+        const html = renderMarkdown(["# Top", "## Mid", "### Low", "#### Deep"].join("\n\n"));
+        expect(html).not.toContain("<h1");
+        expect(html).toContain("<h2>Top</h2>");
+        expect(html).toContain("<h2>Mid</h2>");
+        expect(html).toContain("<h3>Low</h3>");
+        expect(html).toContain("<h4>Deep</h4>");
+    });
+
+    it("keeps inline formatting inside demoted headings", () => {
+        expect(renderMarkdown("# A **big** `idea`")).toContain(
+            "<h2>A <strong>big</strong> <code>idea</code></h2>",
+        );
     });
 });

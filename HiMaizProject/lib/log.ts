@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { marked } from "marked";
+import { Marked } from "marked";
 import { z } from "zod";
 
 export type LogEntry = {
@@ -56,8 +56,33 @@ export function shouldIncludeDrafts(env: NodeJS.ProcessEnv = process.env): boole
     return env.NODE_ENV !== "production" || env.VERCEL_ENV === "preview";
 }
 
-export function renderMarkdown(markdown: string): string {
-    return marked.parse(markdown, { async: false });
+// The entry title is the page's one h1, so a `#` in a body renders as h2.
+const markdown = new Marked({
+    renderer: {
+        heading({ tokens, depth }) {
+            const level = Math.max(depth, 2);
+            return `<h${level}>${this.parser.parseInline(tokens)}</h${level}>\n`;
+        },
+    },
+});
+
+export function renderMarkdown(source: string): string {
+    return markdown.parse(source, { async: false });
+}
+
+const MARKDOWN_FILE = /\.(md|markdown)$/i;
+
+/** Lists entry files. A markdown file that is not a lowercase `.md` would be skipped silently, so it fails instead. */
+function entryFiles(dir: string): string[] {
+    return fs
+        .readdirSync(/* turbopackIgnore: true */ dir)
+        .filter((file) => !file.startsWith(".") && MARKDOWN_FILE.test(file))
+        .map((file) => {
+            if (!file.endsWith(".md")) {
+                throw new LogEntryError(file, "extension", "must use a lowercase .md file name");
+            }
+            return file;
+        });
 }
 
 function parseEntry(dir: string, file: string): LogEntry {
@@ -82,9 +107,7 @@ export function getLogEntries(options: LogOptions = {}): LogEntry[] {
     const includeDrafts = options.includeDrafts ?? shouldIncludeDrafts();
     // Git does not track empty folders, so a missing directory means no entries.
     if (!fs.existsSync(/* turbopackIgnore: true */ dir)) return [];
-    return fs
-        .readdirSync(/* turbopackIgnore: true */ dir)
-        .filter((file) => file.endsWith(".md") && !file.startsWith("."))
+    return entryFiles(dir)
         .map((file) => parseEntry(dir, file))
         .filter((entry) => includeDrafts || !entry.draft)
         .sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
