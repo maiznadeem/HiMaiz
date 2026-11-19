@@ -19,6 +19,8 @@ const tint = (percent: number) => ({
     fill: `color-mix(in srgb, var(--muted) ${percent}%, var(--stone))`,
 });
 
+// Each piece is two groups: the outer one animates in on load (see .piece in globals.css), the
+// inner one carries the paper filter, so the animation never replaces the paper edge and shadow.
 const piece = (i: number) => ({ "--i": i }) as CSSProperties;
 
 /** The hero composition: the logo's leaf and pebble scaled up, with a few more cut pieces. */
@@ -52,22 +54,32 @@ export function PaperArt({ className }: { className?: string }) {
                     />
                 </mask>
             </defs>
-            <g className="piece" style={piece(0)} filter="url(#paper)">
-                <circle cx={138 * GRID} cy={100 * GRID} r={76 * GRID} style={tint(18)} />
-            </g>
-            <g className="piece" style={piece(1)} filter="url(#paper)">
-                <path d={LEAF} transform={SIDE_LEAF} style={tint(45)} />
-            </g>
-            <g className="piece" style={piece(2)} filter="url(#paper)">
-                <g mask="url(#paper-art-vein)">
-                    <path d={LEAF} transform={LOGO} fill="var(--ink)" />
+            <g className="piece" style={piece(0)}>
+                <g filter="url(#paper)">
+                    <circle cx={138 * GRID} cy={100 * GRID} r={76 * GRID} style={tint(18)} />
                 </g>
             </g>
-            <g className="piece" style={piece(3)} filter="url(#paper)">
-                <path d={PEBBLE} transform={LOGO} fill="var(--orange)" />
+            <g className="piece" style={piece(1)}>
+                <g filter="url(#paper)">
+                    <path d={LEAF} transform={SIDE_LEAF} style={tint(45)} />
+                </g>
             </g>
-            <g className="piece" style={piece(4)} filter="url(#paper)">
-                <circle cx={76 * GRID} cy={44 * GRID} r={6 * GRID} fill="var(--orange)" />
+            <g className="piece" style={piece(2)}>
+                <g filter="url(#paper)">
+                    <g mask="url(#paper-art-vein)">
+                        <path d={LEAF} transform={LOGO} fill="var(--ink)" />
+                    </g>
+                </g>
+            </g>
+            <g className="piece" style={piece(3)}>
+                <g filter="url(#paper)">
+                    <path d={PEBBLE} transform={LOGO} fill="var(--orange)" />
+                </g>
+            </g>
+            <g className="piece" style={piece(4)}>
+                <g filter="url(#paper)">
+                    <circle cx={76 * GRID} cy={44 * GRID} r={6 * GRID} fill="var(--orange)" />
+                </g>
             </g>
         </svg>
     );
