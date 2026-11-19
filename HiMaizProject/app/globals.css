@@ -159,8 +159,9 @@ body {
 }
 
 /* The hero pieces start slightly raised, with a larger softer shadow, and settle into place once
-   on load, staggered by --i. The shadow lives on the outer group; the inner group keeps the
-   #paper filter. Backwards fill only: the settled state is the plain, unanimated art. */
+   on load, staggered by --i. Paper is opaque, so each piece is fully opaque within ~115 ms. The
+   shadow lives on the outer group; the inner group keeps the #paper filter. Backwards fill only:
+   the settled state is the plain, unanimated art. */
 @media (prefers-reduced-motion: no-preference) {
     .piece {
         transform-box: fill-box;
@@ -177,7 +178,7 @@ body {
         filter: drop-shadow(0 14px 14px var(--paper-shadow));
     }
 
-    60% {
+    18% {
         opacity: 1;
     }
 
