@@ -79,7 +79,8 @@ describe("buildRss", () => {
 
     it("links entries without a page to the site with a stable guid", () => {
         const xml = buildRss([entry({ slug: "no-page" })], options);
-        expect(xml).toContain("<link>https://himaiz.com/</link>\n      <guid");
+        const item = xml.slice(xml.indexOf("<item>"), xml.indexOf("</item>"));
+        expect(item).toContain("<link>https://himaiz.com/</link>");
         expect(xml).toContain('<guid isPermaLink="false">log-no-page</guid>');
     });
 

@@ -5,17 +5,17 @@ const SHADOW = "rgba(0,0,0,.18)";
 
 /**
  * Flat leaf and pebble for the social image and Apple icon. Satori has no filters, so
- * each piece gets a faked shadow: the same path, offset 4px right and 6px down at
- * 420px (about 1 and 1.5 units in the 100 unit box), drawn behind it.
+ * each piece gets a faked shadow: the same path, drawn behind it and offset a fixed 4px
+ * right and 6px down at any size (so 4/scale and 6/scale units in the 100 unit box).
  */
-export function LeafPebble({ size, stone = "#e7e7e2" }: { size: number; stone?: string }) {
+export function LeafPebble({ size }: { size: number }) {
     const scale = size / 100;
     const shadow = `translate(${4 / scale} ${6 / scale})`;
     return (
         <svg width={size} height={size} viewBox="0 0 100 100">
             <path d={LEAF} fill={SHADOW} transform={shadow} />
             <path d={LEAF} fill="#191919" />
-            <path d={VEIN} stroke={stone} strokeWidth="3" strokeLinecap="round" fill="none" />
+            <path d={VEIN} stroke="#e7e7e2" strokeWidth="3" strokeLinecap="round" fill="none" />
             <path d={PEBBLE} fill={SHADOW} transform={shadow} />
             <path d={PEBBLE} fill="#ff4f1a" />
         </svg>

@@ -35,6 +35,7 @@ export function PaperArt({ className }: { className?: string }) {
         >
             <defs>
                 {/* The vein is a cut: whatever lies under the leaf shows through it. */}
+                {/* The id is fixed because the art renders once per page. */}
                 <mask
                     id="paper-art-vein"
                     maskUnits="userSpaceOnUse"

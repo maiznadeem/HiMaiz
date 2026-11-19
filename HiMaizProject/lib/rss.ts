@@ -15,6 +15,7 @@ function escapeXml(text: string): string {
 function renderItem(entry: LogEntry, siteUrl: string): string {
     const summary = escapeXml(entry.summary);
     const page = `${siteUrl}/log/${entry.slug}`;
+    // Unescaped: siteUrl is a constant and slugs are validated to [a-z0-9-].
     const link = entry.hasPage ? page : `${siteUrl}/`;
     const guid = entry.hasPage
         ? `<guid>${page}</guid>`

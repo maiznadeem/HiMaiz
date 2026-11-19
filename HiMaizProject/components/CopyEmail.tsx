@@ -14,16 +14,22 @@ export function CopyEmail({ email }: { email: string }) {
     const [status, setStatus] = useState<keyof typeof STATUS_TEXT>("idle");
     const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    useEffect(
-        () => () => {
+    const mounted = useRef(true);
+
+    useEffect(() => {
+        mounted.current = true;
+        return () => {
+            mounted.current = false;
             if (resetTimer.current) clearTimeout(resetTimer.current);
-        },
-        [],
-    );
+        };
+    }, []);
 
     async function copy() {
+        const result = await copyText(email, navigator.clipboard);
+        if (!mounted.current) return;
+        setStatus(result);
+        // Cleared after the await, so an earlier click's timer cannot reset this result early.
         if (resetTimer.current) clearTimeout(resetTimer.current);
-        setStatus(await copyText(email, navigator.clipboard));
         resetTimer.current = setTimeout(() => setStatus("idle"), 2600);
     }
 
@@ -33,7 +39,7 @@ export function CopyEmail({ email }: { email: string }) {
             <button
                 type="button"
                 onClick={copy}
-                aria-label={copied ? "Email copied" : "Copy email address"}
+                aria-label="Copy email address"
                 title={copied ? "Copied" : "Copy email address"}
                 className="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-ink transition-[background-color] hover:bg-ink/10"
             >
