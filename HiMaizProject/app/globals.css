@@ -1,721 +1,500 @@
 @import "tailwindcss";
 
 :root {
-    --page-bg: #101112;
-    --ink: #f2f3ef;
-    --muted: #9a9d9c;
-    --line: #2c2e2e;
-    --cyan: #7ff0d7;
-    --background: var(--page-bg);
-    --foreground: var(--ink);
+    --stone: #e7e7e2;
+    --ink: #191919;
+    --orange: #ff4f1a;
+    --muted: #5f5f5a;
+    --paper-shadow: rgba(0, 0, 0, 0.22);
+    --gutter: clamp(1.25rem, 5vw, 3rem);
+    color-scheme: light dark;
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --stone: #22211e;
+        --ink: #ecebe5;
+        --orange: #ff6a3d;
+        --muted: #a3a29a;
+        --paper-shadow: rgba(0, 0, 0, 0.55);
+    }
+}
+
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-    --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+    --color-stone: var(--stone);
+    --color-ink: var(--ink);
+    --color-orange: var(--orange);
+    --color-muted: var(--muted);
+    --font-serif: var(--font-fraunces);
 }
-* {
-    box-sizing: border-box;
-    letter-spacing: 0;
-}
-html {
-    background: var(--page-bg);
-    color: var(--ink);
-}
+
 body {
-    margin: 0;
-    font-family: var(--font-space-grotesk), sans-serif;
-}
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
-}
-button {
-    font: inherit;
-}
-a {
-    color: inherit;
-    text-decoration: none;
-}
-button:not(:disabled),
-a {
-    touch-action: manipulation;
-}
-button:disabled {
-    cursor: default;
-}
-::selection {
-    color: var(--page-bg);
-    background: var(--cyan);
-}
-:focus-visible {
-    outline: 2px solid var(--cyan);
-    outline-offset: 6px;
-}
-.site-shell {
-    --gutter: 3.5rem;
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    width: 100%;
-    min-height: 44rem;
-    height: 100vh;
-    height: 100svh;
-    height: 100dvh;
-    padding: env(safe-area-inset-top, 0px) max(var(--gutter), env(safe-area-inset-right, 0px))
-        env(safe-area-inset-bottom, 0px) max(var(--gutter), env(safe-area-inset-left, 0px));
-    overflow: clip;
-}
-.site-header {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 6.6rem;
-    border-bottom: 1px solid var(--line);
-}
-.brand-lockup {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-.brand-mark {
-    width: 2.8rem;
-    height: 2.8rem;
-    margin-left: -0.55rem;
-}
-.brand-period {
-    color: var(--cyan);
-}
-.header-note {
-    font-size: 0.75rem;
-    color: var(--muted);
-}
-.header-contact {
-    display: inline-flex;
-    min-height: 44px;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.8rem;
-}
-.header-contact svg {
-    transition: transform 220ms ease;
-}
-.header-contact:hover svg {
-    transform: translate(3px, -3px);
-}
-.header-contact:hover {
-    color: var(--cyan);
-}
-.hero {
-    position: relative;
-    isolation: isolate;
-    min-height: 0;
-}
-.composition-guides {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-.guide {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: #ffffff04;
-}
-.guide-one {
-    left: 39%;
-}
-.guide-two {
-    left: 65%;
-}
-.guide-three {
-    right: 0;
-}
-.registration {
-    position: absolute;
-    color: #656a68;
-    font-family: var(--font-geist-mono), monospace;
-    font-size: 0.85rem;
-    line-height: 1;
-}
-.registration-one {
-    top: 2.4rem;
-    left: 65%;
-    transform: translateX(-50%);
-}
-.registration-two {
-    right: 0;
-    bottom: 6.5rem;
-    transform: translateX(50%);
-}
-.monolith-stage {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-}
-.monolith-canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-.monolith-fallback {
-    position: absolute;
-    width: var(--art-size, 35%);
-    height: auto;
-    left: var(--art-x, 74%);
-    top: var(--art-y, 48%);
-    color: #a9afae;
-    transform: translate(-50%, -50%) rotate(-9deg);
-}
-.hero-intro {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 58%;
-    transform: translateY(-53%);
-}
-.eyebrow {
-    font-family: var(--font-geist-mono), monospace;
-    font-size: 0.65rem;
-    font-weight: 400;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-.index-number {
-    display: inline-block;
-    margin-right: 1.2rem;
-    color: var(--cyan);
-}
-.hero-title {
-    margin: 1.7rem 0 1.6rem -0.07em;
-    font-size: 7.5rem;
-    font-weight: 500;
-    line-height: 0.99;
-}
-.title-line {
-    display: block;
-    overflow: hidden;
-    padding: 0 0.07em 0.13em;
-    margin-bottom: -0.13em;
-}
-.title-line > span {
-    display: block;
-    animation: type-arrive 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.title-line:nth-child(2) > span {
-    animation-delay: 100ms;
-}
-.title-period {
-    color: var(--cyan);
-}
-.hero-description {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.1rem;
-}
-.description-rule {
-    width: 2rem;
-    height: 1px;
-    margin-top: 0.75rem;
-    background: var(--cyan);
-    flex: 0 0 auto;
-}
-.hero-description p {
-    font-size: 0.91rem;
-    line-height: 1.75;
-    color: #aeb1ae;
-}
-.hero-bottom {
-    position: absolute;
-    bottom: 2.25rem;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-.coming-soon {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    color: var(--muted);
-    font-size: 0.72rem;
-}
-.coming-soon > span {
-    width: 5px;
-    height: 5px;
-    background: #c3c6c2;
-    border-radius: 50%;
-}
-.art-caption {
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
-}
-.art-caption-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    font-family: var(--font-geist-mono), monospace;
-    font-size: 0.57rem;
-}
-.art-caption-copy > span:first-child {
-    color: #b8bcb8;
-}
-.art-caption-copy > span:last-child {
-    color: #858a86;
-}
-.icon-button {
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    flex: 0 0 44px;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border: 1px solid var(--line);
-    color: #aeb1ae;
-    background: transparent;
-    cursor: pointer;
-    transition:
-        color 180ms ease,
-        border-color 180ms ease,
-        background-color 180ms ease;
-}
-.motion-toggle {
-    border-radius: 50%;
-}
-.icon-button:hover,
-.icon-button:focus-visible {
-    border-color: #68716c;
-    color: var(--cyan);
-    background: #ffffff05;
-}
-.icon-button:disabled {
-    opacity: 0.5;
-}
-.tooltip {
-    position: absolute;
-    bottom: calc(100% + 10px);
-    right: 0;
-    width: max-content;
-    max-width: 12rem;
-    padding: 0.45rem 0.65rem;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    background: #202322;
-    font-size: 0.7rem;
-    line-height: 1.4;
+    background: var(--stone);
     color: var(--ink);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(3px);
-    transition:
-        opacity 160ms ease,
-        transform 160ms ease;
-}
-.icon-button:hover .tooltip,
-.icon-button:focus-visible .tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-}
-.site-footer {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    border-top: 1px solid #414640;
-    padding-top: 1.55rem;
-}
-.footer-invitation .eyebrow {
-    font-size: 0.65rem;
-}
-.footer-heading {
-    margin-top: 0.4rem;
-    font-size: 1.2rem;
+    font-family: var(--font-fraunces), Georgia, serif;
     font-weight: 400;
+    font-variation-settings:
+        "SOFT" 50,
+        "WONK" 0;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
 }
-.contact-area {
-    position: relative;
-    display: flex;
-    gap: 1.1rem;
-    align-items: center;
+
+/* Page wrapper: the gutter, widened where a notch or home indicator takes space (viewportFit: cover). */
+.page-pad {
+    padding-inline: max(var(--gutter), env(safe-area-inset-left), env(safe-area-inset-right));
+    padding-bottom: env(safe-area-inset-bottom);
 }
-.contact-link {
-    display: inline-flex;
+
+.display {
+    font-weight: 700;
+    font-variation-settings:
+        "SOFT" 100,
+        "WONK" 1,
+        "opsz" 144;
+    letter-spacing: -0.02em;
+}
+
+.link {
+    text-decoration-line: underline;
+    text-decoration-color: var(--orange);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    transition: text-decoration-color 150ms;
+}
+
+.link:hover {
+    text-decoration-color: currentColor;
+}
+
+:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+    /* Orange alone is under 3:1 on stone; a 1px ink ring inside it carries the contrast. */
+    box-shadow: 0 0 0 1px var(--ink);
+}
+
+.prose {
+    max-width: 65ch;
+    font-size: 1.125rem;
+}
+
+.prose > * + * {
+    margin-top: 1.25em;
+}
+
+.prose h2,
+.prose h3 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 2em;
+}
+
+.prose h2 {
+    font-size: 1.5rem;
+}
+
+.prose h3 {
+    font-size: 1.25rem;
+}
+
+.prose h4 {
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.3;
+    margin-top: 1.75em;
+}
+
+.prose :is(h2, h3, h4) + * {
+    margin-top: 0.75em;
+}
+
+.prose a {
+    color: var(--ink);
+    text-decoration-line: underline;
+    text-decoration-color: var(--orange);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    overflow-wrap: anywhere;
+}
+
+.prose a:hover {
+    text-decoration-color: currentColor;
+}
+
+.prose :is(ul, ol) {
+    padding-left: 1.5em;
+}
+
+.prose ul {
+    list-style: disc;
+}
+
+.prose ol {
+    list-style: decimal;
+}
+
+.prose li + li {
+    margin-top: 0.4em;
+}
+
+.prose blockquote {
+    border-left: 4px solid var(--orange);
+    padding-left: 1.25em;
+    color: var(--muted);
+}
+
+.prose code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.875em;
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
+    border-radius: 0.25rem;
+    padding: 0.1em 0.35em;
+    overflow-wrap: anywhere;
+}
+
+.prose pre {
+    overflow-x: auto;
+    padding: 1em 1.25em;
+    border-radius: 0.5rem;
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.prose pre code {
+    background: none;
+    padding: 0;
+}
+
+.prose img {
     max-width: 100%;
-    min-height: 44px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.4rem;
-    border-bottom: 1px solid #5c8276;
-    font-size: 0.93rem;
-    color: var(--cyan);
+    height: auto;
 }
-.contact-link svg {
-    flex-shrink: 0;
-    transition: transform 200ms ease;
+
+.prose hr {
+    border-color: color-mix(in srgb, var(--ink) 25%, transparent);
 }
-.contact-link:hover svg {
-    transform: translate(3px, -3px);
-}
-.copy-button {
-    border: 0;
-}
-.footer-colophon {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1.65rem 0 1.4rem;
-    font-family: var(--font-geist-mono), monospace;
-    color: #898e89;
-    font-size: 0.65rem;
-}
-.launch-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-}
-.launch-status > span {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--cyan);
-}
-.reveal {
-    animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.reveal-one {
-    animation-delay: 100ms;
-}
-.reveal-three {
-    animation-delay: 250ms;
-}
-.reveal-four {
-    animation-delay: 400ms;
-}
-@keyframes type-arrive {
-    from {
-        transform: translateY(110%) rotate(3deg);
+
+/* The hero pieces (see Piece in PaperArt.tsx). Each enters once on load at --d: the backdrop is
+   laid down, the leaves sprout from the stem and unfurl, the pebble drops and bounces, and the dot
+   pops in where the ink trail ends. After that the leaves sway, the pebble rocks and the dot
+   floats, slowly and forever. Poking a piece (pointer or tap) rustles a leaf, hops the pebble or
+   bounces the dot. Entrances fill backwards only, so the settled state is the plain art, and with
+   reduced motion none of this runs.
+   Leaves turn around their stem (--ox, --oy, in svg units); the pebble moves from the middle of
+   its base, so it squashes against the ground. */
+@media (prefers-reduced-motion: no-preference) {
+    .enter-sprout,
+    .idle-sprout,
+    .poke-sprout {
+        transform-box: view-box;
+        transform-origin: var(--ox) var(--oy);
     }
-    to {
-        transform: translateY(0) rotate(0deg);
+
+    .enter-drop,
+    .idle-drop,
+    .poke-drop {
+        transform-box: fill-box;
+        transform-origin: 50% 100%;
+    }
+
+    .enter-lay,
+    .enter-pop,
+    .idle-pop,
+    .poke-pop {
+        transform-box: fill-box;
+        transform-origin: center;
+    }
+
+    .enter-lay {
+        animation: enter-lay 620ms cubic-bezier(0.22, 0.8, 0.3, 1) var(--d) backwards;
+    }
+
+    .enter-sprout {
+        animation: enter-sprout 920ms linear var(--d) backwards;
+    }
+
+    .enter-drop {
+        animation: enter-drop 780ms linear var(--d) backwards;
+    }
+
+    .enter-pop {
+        animation: enter-pop 540ms linear var(--d) backwards;
+    }
+
+    .idle-sprout {
+        animation: sway var(--sway-t) ease-in-out calc(var(--d) + 920ms) infinite;
+    }
+
+    .idle-drop {
+        animation: rock 7.2s ease-in-out calc(var(--d) + 780ms) infinite;
+    }
+
+    .idle-pop {
+        animation: float 3.6s ease-in-out calc(var(--d) + 540ms) infinite;
+    }
+
+    .poke-sprout[data-poked] {
+        animation: rustle 760ms ease-out;
+    }
+
+    .poke-drop[data-poked] {
+        animation: hop 680ms linear;
+    }
+
+    .poke-pop[data-poked] {
+        animation: boing 560ms ease-out;
     }
 }
-@keyframes reveal {
+
+@keyframes enter-lay {
     from {
+        transform: scale(0.88);
         opacity: 0;
-        transform: translateY(10px);
+        filter: drop-shadow(0 14px 14px var(--paper-shadow));
     }
-    to {
+
+    25% {
         opacity: 1;
-        transform: translateY(0);
     }
-}
-@media (min-width: 1600px) {
-    .site-shell {
-        --gutter: 5rem;
-    }
-    .hero-title {
-        font-size: 9rem;
-    }
-    .hero-description p {
-        font-size: 1rem;
-    }
-}
-@media (max-width: 1199px) {
-    .site-shell {
-        --gutter: 2.5rem;
-    }
-    .hero-title {
-        font-size: 6rem;
-    }
-    .footer-heading {
-        font-size: 1rem;
-    }
-    .contact-link {
-        font-size: 0.8rem;
-        gap: 0.75rem;
-    }
-}
-@media (min-width: 760px) and (max-height: 760px) {
-    .site-shell {
-        min-height: 36rem;
-    }
-    .site-header {
-        min-height: 5rem;
-    }
-    .hero-title {
-        font-size: 5.5rem;
-        margin-top: 1rem;
-        margin-bottom: 1.2rem;
-    }
-    .hero-bottom {
-        bottom: 1.1rem;
-    }
-    .hero-intro {
-        transform: translateY(-59%);
-    }
-    .site-footer {
-        padding-top: 1rem;
-    }
-    .footer-colophon {
-        padding-top: 1.15rem;
-        padding-bottom: 1rem;
-    }
-}
-@media (min-width: 760px) and (max-width: 1023px) {
-    .hero-title {
-        font-size: 5rem;
-    }
-}
-@media (max-width: 759px) {
-    .site-shell {
-        --gutter: 1.5rem;
-        min-height: 38rem;
-    }
-    .site-header {
-        min-height: 4.75rem;
-    }
-    .brand-lockup {
-        font-size: 1rem;
-    }
-    .brand-mark {
-        width: 2.45rem;
-        height: 2.45rem;
-    }
-    .header-note {
-        display: none;
-    }
-    .header-contact {
-        font-size: 0.72rem;
-        gap: 0.6rem;
-    }
-    .hero-intro {
-        top: 2rem;
+
+    to {
         transform: none;
-        width: 100%;
-    }
-    .eyebrow {
-        font-size: 0.55rem;
-    }
-    .index-number {
-        margin-right: 0.6rem;
-    }
-    .hero-title {
-        font-size: 4.5rem;
-        margin-top: 1.1rem;
-        margin-bottom: 1rem;
-    }
-    .hero-description {
-        gap: 0.7rem;
-    }
-    .description-rule {
-        width: 1.1rem;
-        margin-top: 0.6rem;
-    }
-    .hero-description p {
-        font-size: 0.76rem;
-        line-height: 1.7;
-    }
-    .hero-bottom {
-        bottom: 1rem;
-        gap: 0.5rem;
-    }
-    .coming-soon {
-        max-width: 10rem;
-        font-size: 0.6rem;
-        line-height: 1.6;
-        gap: 0.5rem;
-    }
-    .coming-soon > span {
-        flex: 0 0 4px;
-        height: 4px;
-    }
-    .art-caption {
-        gap: 0.4rem;
-    }
-    .art-caption-copy {
-        display: none;
-    }
-    .motion-toggle {
-        width: 38px;
-        height: 38px;
-        flex-basis: 38px;
-    }
-    .registration-one {
-        top: 1rem;
-        left: auto;
-        right: 0;
-    }
-    .registration-two {
-        bottom: 5rem;
-    }
-    .guide-one {
-        left: 50%;
-    }
-    .guide-two {
-        display: none;
-    }
-    .monolith-fallback {
-        width: var(--art-size, 55%);
-        left: var(--art-x, 60%);
-        top: var(--art-y, 68%);
-    }
-    .site-footer {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0.35rem;
-        padding-top: 1rem;
-    }
-    .footer-invitation {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 0.4rem;
-    }
-    .footer-invitation .eyebrow {
-        font-size: 0.6rem;
-        text-transform: none;
-    }
-    .footer-heading {
-        font-size: 0.75rem;
-        margin: 0;
-    }
-    .contact-area {
-        gap: 0.25rem;
-    }
-    .contact-link {
-        flex: 1;
-        gap: 0.4rem;
-        font-size: 0.77rem;
-    }
-    .contact-link svg {
-        width: 19px;
-    }
-    .copy-button {
-        width: 36px;
-        flex-basis: 36px;
-    }
-    .footer-colophon {
-        padding: 0.75rem 0 1rem;
-        font-size: 0.6rem;
-        gap: 0.35rem;
+        opacity: 1;
+        filter: drop-shadow(0 0 0 transparent);
     }
 }
-@media (max-width: 759px) and (max-height: 730px) {
-    .site-shell {
-        min-height: 34rem;
+
+/* A leaf starts small and folded over, grows out of the stem, overshoots and settles. */
+@keyframes enter-sprout {
+    from {
+        transform: rotate(calc(var(--sway) * 18)) scale(0.2);
+        opacity: 0;
+        animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
     }
-    .site-header {
-        min-height: 4.1rem;
+
+    12% {
+        opacity: 1;
     }
-    .hero-intro {
-        top: 1.25rem;
+
+    55% {
+        transform: rotate(calc(var(--sway) * -2.5)) scale(1.04);
+        animation-timing-function: ease-in-out;
     }
-    .hero-title {
-        font-size: 3.6rem;
-        margin-top: 0.75rem;
-        margin-bottom: 0.8rem;
+
+    78% {
+        transform: rotate(var(--sway)) scale(0.99);
+        animation-timing-function: ease-in-out;
     }
-    .hero-description p {
-        font-size: 0.7rem;
-    }
-    .hero-bottom {
-        bottom: 0.6rem;
-    }
-    .site-footer {
-        padding-top: 0.75rem;
-    }
-    .footer-colophon {
-        padding-top: 0.4rem;
-        padding-bottom: 0.6rem;
-    }
-}
-@media (max-width: 359px) {
-    .site-shell {
-        --gutter: 1.1rem;
-    }
-    .hero-title {
-        font-size: 3.2rem;
-    }
-    .contact-link {
-        font-size: 0.66rem;
-    }
-    .footer-colophon > span:first-child {
-        max-width: 8rem;
+
+    to {
+        transform: none;
+        opacity: 1;
     }
 }
-@media (orientation: landscape) and (max-height: 540px) {
-    .site-shell {
-        min-height: 22rem;
-        --gutter: 1.5rem;
+
+/* The pebble falls (stretched), squashes on landing, bounces once and settles. */
+@keyframes enter-drop {
+    from {
+        transform: translateY(-150px) scale(0.94, 1.08);
+        opacity: 0;
+        animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5);
     }
-    .site-header {
-        min-height: 3.5rem;
+
+    4% {
+        opacity: 1;
     }
-    .hero-intro {
-        top: 50%;
-        width: 58%;
-        transform: translateY(-54%);
+
+    50% {
+        transform: translateY(0) scale(0.94, 1.08);
+        animation-timing-function: ease-out;
     }
-    .hero-title {
-        font-size: 3.2rem;
-        margin: 0.6rem 0 0.6rem -0.07em;
+
+    60% {
+        transform: translateY(0) scale(1.16, 0.8);
+        animation-timing-function: ease-out;
     }
-    .hero-description p {
-        font-size: 0.66rem;
+
+    76% {
+        transform: translateY(-14px) scale(0.97, 1.04);
+        animation-timing-function: ease-in;
     }
-    .hero-bottom {
-        bottom: 0.5rem;
+
+    88% {
+        transform: translateY(0) scale(1.05, 0.95);
+        animation-timing-function: ease-out;
     }
-    .coming-soon {
-        display: none;
-    }
-    .art-caption {
-        margin-left: auto;
-    }
-    .art-caption-copy {
-        display: none;
-    }
-    .site-footer {
-        grid-template-columns: 1fr auto;
-        padding-top: 0.45rem;
-        gap: 0;
-    }
-    .footer-invitation {
-        display: block;
-    }
-    .footer-heading {
-        font-size: 0.7rem;
-    }
-    .footer-colophon {
-        padding-top: 0.35rem;
-        padding-bottom: 0.45rem;
+
+    to {
+        transform: none;
+        opacity: 1;
     }
 }
-[data-motion="paused"] .reveal,
-[data-motion="paused"] .title-line > span {
-    animation: none;
+
+@keyframes enter-pop {
+    from {
+        transform: scale(0);
+        animation-timing-function: cubic-bezier(0.3, 0, 0.6, 1);
+    }
+
+    55% {
+        transform: scale(1.45);
+        animation-timing-function: ease-in-out;
+    }
+
+    78% {
+        transform: scale(0.88);
+        animation-timing-function: ease-in-out;
+    }
+
+    to {
+        transform: none;
+    }
 }
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
+
+@keyframes sway {
+    0%,
+    100% {
+        transform: none;
+    }
+
+    25% {
+        transform: rotate(var(--sway));
+    }
+
+    75% {
+        transform: rotate(calc(var(--sway) * -1));
+    }
+}
+
+@keyframes rock {
+    0%,
+    100% {
+        transform: none;
+    }
+
+    30% {
+        transform: rotate(1.4deg);
+    }
+
+    70% {
+        transform: rotate(-1deg);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: none;
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes rustle {
+    14% {
+        transform: rotate(calc(var(--sway) * 5));
+    }
+
+    34% {
+        transform: rotate(calc(var(--sway) * -3.5));
+    }
+
+    54% {
+        transform: rotate(calc(var(--sway) * 2));
+    }
+
+    74% {
+        transform: rotate(calc(var(--sway) * -0.8));
+    }
+}
+
+@keyframes hop {
+    14% {
+        transform: scale(1.12, 0.86);
+        animation-timing-function: ease-out;
+    }
+
+    46% {
+        transform: translateY(-26px) scale(0.95, 1.06);
+        animation-timing-function: ease-in;
+    }
+
+    70% {
+        transform: translateY(0) scale(1.12, 0.88);
+        animation-timing-function: ease-out;
+    }
+
+    84% {
+        transform: translateY(-4px) scale(0.98, 1.02);
+    }
+}
+
+@keyframes boing {
+    30% {
+        transform: scale(1.5);
+    }
+
+    55% {
+        transform: scale(0.85);
+    }
+
+    78% {
+        transform: scale(1.08);
+    }
+}
+
+/* Ink: hand-drawn marks. Each .ink-line draws itself in once, starting at --d. An .ink group
+   cycles through three roughened versions of its lines (the #ink-N filters) a few times a
+   second, the "boiling" line of frame-by-frame hand-drawn animation. */
+.ink {
+    filter: url(#ink-0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .ink {
+        animation: ink-boil 480ms steps(1, end) infinite;
+    }
+
+    .ink-line {
+        stroke-dasharray: 1 2;
+        animation: ink-draw 560ms cubic-bezier(0.45, 0, 0.25, 1) backwards;
+        animation-delay: var(--d, 0ms);
+    }
+}
+
+@keyframes ink-boil {
+    0% {
+        filter: url(#ink-0);
+    }
+
+    33.33% {
+        filter: url(#ink-1);
+    }
+
+    66.67% {
+        filter: url(#ink-2);
+    }
+}
+
+@keyframes ink-draw {
+    from {
+        stroke-dashoffset: 1;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* The logo tilts like a picked-up cut-out. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .brand svg {
+        transition: transform 260ms cubic-bezier(0.3, 1.6, 0.5, 1);
+    }
+
+    .brand:hover svg {
+        transform: rotate(-12deg) translateY(-1px);
     }
 }

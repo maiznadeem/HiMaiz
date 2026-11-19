@@ -1,7 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
-    <title id="title">HiMaiz icon</title>
-    <rect width="128" height="128" rx="28" fill="#071012" />
-    <path d="M26 94V34H48L64 62L80 34H102V94H86V58L70 86H58L42 58V94H26Z" fill="#f6f1e8" />
-    <path d="M80 34H102V56H80V34Z" fill="#7ff0d7" />
-    <path d="M80 56H86V70L70 86H58L80 56Z" fill="#071012" opacity="0.18" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+    <style>
+        .leaf { fill: #191919; }
+        .vein { stroke: #e7e7e2; }
+        .pebble { fill: #ff4f1a; }
+        @media (prefers-color-scheme: dark) {
+            .leaf { fill: #ecebe5; }
+            .vein { stroke: #22211e; }
+            .pebble { fill: #ff6a3d; }
+        }
+    </style>
+    <path class="leaf" d="M18 82C16 50 34 20 76 14 82 46 62 78 18 82Z" />
+    <path class="vein" d="M23 77C40 58 54 40 71 20" stroke-width="3" stroke-linecap="round" fill="none" />
+    <path class="pebble" d="M70 64c8-4 16 2 14 10-2 8-14 10-18 4-3-5-1-11 4-14z" />
 </svg>

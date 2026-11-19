@@ -1,18 +1,27 @@
 import Link from "next/link";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export default function NotFound() {
     return (
-        <main className="grid min-h-dvh place-items-center bg-[var(--page-bg)] px-6 text-center text-[var(--ink)]">
-            <div>
-                <p className="eyebrow">404</p>
-                <h1 className="mt-4 text-5xl font-semibold tracking-normal">Signal lost.</h1>
-                <p className="mt-4 max-w-md text-[var(--muted)]">
-                    This route is not part of the current build.
+        <div className="mx-auto flex min-h-dvh max-w-6xl flex-col page-pad">
+            <SiteHeader />
+            <main className="flex-1 pt-10 md:pt-16">
+                <h1 className="display max-w-[16ch] text-[clamp(2.5rem,5.2vw,4.25rem)] leading-[1.02] text-balance">
+                    This page doesn&rsquo;t exist.
+                </h1>
+                <p className="mt-6 max-w-[34ch] text-lg text-muted md:text-xl">
+                    The link may be old, or the entry may not be published yet.
                 </p>
-                <Link className="contact-link mt-8 inline-flex" href="/">
-                    return home
-                </Link>
+                <p className="mt-8">
+                    <Link className="link font-semibold" href="/">
+                        Go to the home page
+                    </Link>
+                </p>
+            </main>
+            <div className="mt-16">
+                <SiteFooter />
             </div>
-        </main>
+        </div>
     );
 }

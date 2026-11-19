@@ -1,41 +1,40 @@
-# HiMaiz Monolith M Assets
+# HiMaiz Leaf and Pebble Assets
 
-This folder contains the selected mark-only identity system for HiMaiz.
+The identity is a warm paper cut-out: a pointed ink leaf with a thin vein cut through it
+(the page colour showing through) and a small orange pebble just below and right of it.
 
-## Selected Direction
+## Files
 
-**Monolith M**: a compact, premium, app-ready `M` mark with a single cyan signal
-notch. It is designed to work as a favicon, app icon, social avatar, and
-general personal-brand mark without relying on the text `HiMaiz`.
+- `leaf-pebble.svg` - master mark on stone (light).
+- `leaf-pebble-dark.svg` - master mark on dark stone.
+- `leaf-pebble-mono.svg` - single-colour version (ink on stone, pebble in ink).
+- `leaf-pebble-app-icon.svg` - square, rounded app icon on stone, with padding.
+- `leaf-pebble-preview.png` - the four SVGs side by side.
+- `archive/monolith-m/` - the previous Monolith M identity, kept for reference.
 
-## Final Files
+The site favicon is `HiMaizProject/app/icon.svg`. It has no background and switches colours
+with `prefers-color-scheme`.
 
-- `brand-source.svg` - editable master source with variants and construction grid.
-- `logo-mark.svg` - primary dark mark.
-- `logo-mark-light.svg` - light-background version.
-- `logo-mark-mono.svg` - monochrome/restricted-color version.
-- `logo-mark-transparent.svg` - transparent-background mark.
-- `favicon.svg` - browser favicon source.
-- `apple-touch-icon.svg` - app/home-screen icon source.
-- `brand-preview.png` - rendered preview sheet.
+## Palette
 
-## Concept Archive
+| Token  | Light     | Dark      |
+| ------ | --------- | --------- |
+| Stone  | `#e7e7e2` | `#22211e` |
+| Ink    | `#191919` | `#ecebe5` |
+| Orange | `#ff4f1a` | `#ff6a3d` |
+| Muted  | `#5f5f5a` | `#a3a29a` |
 
-The earlier M explorations remain available as `logo-concept-*.svg` plus
-`logo-concepts-preview.*` so we can refer back if needed.
+Orange is for shapes, rules and focus rings only, never body-size text (contrast about 2.9:1).
 
-## Colors
+## Geometry (100 x 100 viewBox)
 
-```txt
-Charcoal    #071012
-Ink         #f6f1e8
-Accent      #7ff0d7
-Paper       #f4f1eb
-Muted       #687477
-```
+- Leaf: `M18 82C16 50 34 20 76 14 82 46 62 78 18 82Z`, filled ink.
+- Vein: `M23 77C40 58 54 40 71 20`, stroke in the page colour, width 3, round caps.
+- Pebble: `M70 64c8-4 16 2 14 10-2 8-14 10-18 4-3-5-1-11 4-14z`, filled orange.
 
-## Editing
+## Paper effect
 
-Open `brand-source.svg` in Illustrator, Figma, Affinity Designer, or Inkscape.
-The mark is pure vector geometry, so proportions, colors, and corner radii can
-be adjusted without losing quality.
+On the page, the mark uses the `#paper` SVG filter (`PaperFilter`): `feTurbulence`
+fractalNoise at 0.06, 2 octaves, seed 4, into `feDisplacementMap` at scale 0.8 for softly
+irregular edges, then `feDropShadow` (dx 0.8, dy 1.6, blur 0.9) for the shadow. The files in
+this folder and the favicon are flat, with no filter.

@@ -1,37 +1,63 @@
 # HiMaiz
 
-Personal coming-soon site for Maiz, built with Next.js App Router and designed
-for Vercel deployment.
+Personal site for Maiz Nadeem at [himaiz.com](https://himaiz.com): a short home
+page, a work log and an RSS feed. Built with Next.js App Router and deployed on
+Vercel.
 
 ## Stack
 
-- Next.js 16
+- Next.js 16 (App Router, static generation)
 - React 19
 - Tailwind CSS 4
 - TypeScript
+- Vitest for tests
+- Fraunces, loaded through `next/font/google`
+- `gray-matter`, `marked` and `zod` for the work log
 - npm
-- Three.js for the custom Monolith M sculpture
-- Motion for spring-driven pointer interactions
-- Lucide for interface icons
 
-## Design References
+There is no 3D, canvas, analytics or animation library. The paper look is SVG
+shapes with an SVG filter and CSS.
 
-The homepage combines the editorial scale and negative space of
-[Design Prompts: Bold Typography](https://www.designprompts.dev/bold-typography)
-with the pointer-driven depth interaction demonstrated by
-[Aceternity UI](https://ui.aceternity.com/components/3d-card-effect).
-Both resources were identified in the supplied design reel. The layout and
-Monolith sculpture are original implementations, not copied paid templates.
+Hand-drawn ink sits on top of the paper: a dashed flight trail, pops, drop lines and a curled
+stem in the hero (`PaperArt`), an orange scribble under the headline (`InkUnderline`) and
+wobbly rules (`InkRule`). Each line draws itself in once on load. The hero ink "boils" by
+cycling three roughened copies of itself (the `#ink-N` filters in `PaperFilter`), like
+frame-by-frame hand animation.
 
-`components/Monolith.tsx` derives its geometry from the selected Monolith M logo.
-It lazy-loads Three.js, caps pixel density, pauses when the page is hidden,
-respects live reduced-motion settings, and falls back to the brand SVG if
-WebGL is unavailable. No third-party images, tracking, or runtime asset requests
-are required by the artwork.
+The paper pieces have their own motion (`Piece` in `PaperArt`). On load the backdrop is laid
+down, the leaves sprout from the stem, the pebble drops and bounces, and the dot pops in where
+the trail ends. After that the leaves sway, the pebble rocks and the dot floats. Hovering over
+or tapping a piece rustles a leaf, hops the pebble or bounces the dot (`Poke`). All of it is CSS,
+apart from `Poke`, which only switches a data attribute on and off. With reduced motion,
+everything shows finished and still.
 
-The page uses dynamic viewport height and safe-area padding. Normal mobile
-sizes fit in one screen; very short viewports or enlarged text may scroll so
-the contact information remains accessible.
+## Identity
+
+A warm paper cut-out look: a leaf and a pebble, cut from paper, on stone.
+
+| Token  | Light     | Dark      |
+| ------ | --------- | --------- |
+| stone  | `#e7e7e2` | `#22211e` |
+| ink    | `#191919` | `#ecebe5` |
+| orange | `#ff4f1a` | `#ff6a3d` |
+| muted  | `#5f5f5a` | `#a3a29a` |
+
+Dark values apply under `prefers-color-scheme: dark`. Orange is for shapes,
+rules, focus rings and large display type, never body-size text.
+
+Fraunces is the only typeface. Display is 700 with `SOFT` 100, `WONK` 1 and
+`opsz` 144; body is 400 with `SOFT` 50 and `WONK` 0.
+
+The social image (`app/opengraph-image.tsx`) and Apple icon
+(`app/apple-icon.tsx`) are rendered with `next/og`. Satori cannot use variable
+font axes, so they load a static instance of Fraunces from
+`assets/fonts/Fraunces-Soft-700.ttf` (SIL OFL, see `assets/fonts/OFL.txt`). It
+was made from the Google Fonts variable file with:
+
+```bash
+python -m fontTools.varLib.instancer "Fraunces[SOFT,WONK,opsz,wght].ttf" \
+  wght=700 opsz=144 SOFT=100 WONK=1 -o assets/fonts/Fraunces-Soft-700.ttf
+```
 
 ## Local Development
 
@@ -48,11 +74,50 @@ Open `http://localhost:3000`.
 npm run lint
 npm run typecheck
 npm run format:check
+npm test
 npm run build
 npm audit
 ```
 
+`npm test` runs the Vitest suite (log parsing, dates, RSS, clipboard). `npm audit`
+should report no high or critical findings.
+
+## Adding a log entry
+
+Each entry is a Markdown file in `content/log/`.
+
+**File name.** The name is the entry's URL slug, so `my-entry.md` becomes
+`/log/my-entry`. Use lowercase letters, digits and hyphens only. A name such as
+`My Entry.md` or `foo_bar.md` fails the build and the error names the file. So
+does a `.MD` or `.markdown` extension: use a lowercase `.md` file name.
+
+**Frontmatter.** `date` and `summary` are required; `draft` is optional and
+defaults to `false`.
+
+```md
+---
+date: "2026-11-19"
+summary: Moved the site to a paper cut-out look.
+draft: false
+---
+
+Optional body in Markdown. Leave it empty for a one-line entry.
+```
+
+- `date` is a real calendar date, `YYYY-MM-DD`.
+- Body headings start at `##`. The summary is the page's `h1`, so a `#` in the body is rendered as `##`.
+- `summary` is one line of plain text. It is the text shown in the log, the
+  entry page title and the RSS item title.
+
+**Drafts.** Entries with `draft: true` show up in `npm run dev` and in Vercel
+preview deploys (`VERCEL_ENV=preview`). They are hidden in production
+(`VERCEL_ENV=production`) and in a plain local `npm run build`.
+
+**Entry pages.** An entry gets its own page at `/log/<slug>`, and appears in the
+sitemap, when its body is not empty. An entry with no body only appears in the
+log list and in the feed.
+
 ## Deployment
 
 Vercel auto-detects the Next.js app. `next.config.ts` adds baseline security
-headers.
+headers. The RSS feed is served at `/log/rss.xml`.

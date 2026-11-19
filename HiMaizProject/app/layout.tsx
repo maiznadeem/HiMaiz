@@ -1,23 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Fraunces } from "next/font/google";
+import { PaperFilter } from "@/components/PaperFilter";
+import { OPEN_GRAPH_BASE, RSS_ALTERNATE, TAGLINE } from "@/lib/site";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-    variable: "--font-space-grotesk",
+const fraunces = Fraunces({
     subsets: ["latin"],
+    axes: ["SOFT", "WONK", "opsz"],
+    variable: "--font-fraunces",
     display: "swap",
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
 });
 
 export const viewport: Viewport = {
     width: "device-width",
     initialScale: 1,
     viewportFit: "cover",
-    themeColor: "#101112",
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: "#e7e7e2" },
+        { media: "(prefers-color-scheme: dark)", color: "#22211e" },
+    ],
 };
 
 export const metadata: Metadata = {
@@ -26,14 +27,14 @@ export const metadata: Metadata = {
         default: "Maiz Nadeem | A Personal Space, Taking Shape",
         template: "%s | Maiz Nadeem",
     },
-    description:
-        "Thoughtful code. Curious experiments. A new home for everything in between. The personal website of Maiz Nadeem, coming soon.",
+    description: TAGLINE,
     applicationName: "HiMaiz",
     authors: [{ name: "Maiz" }],
     creator: "Maiz",
     publisher: "Maiz",
     alternates: {
         canonical: "/",
+        types: RSS_ALTERNATE,
     },
     keywords: [
         "Maiz",
@@ -46,29 +47,18 @@ export const metadata: Metadata = {
     ],
     icons: {
         icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-        apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
     },
     openGraph: {
+        ...OPEN_GRAPH_BASE,
         title: "Maiz Nadeem | A Personal Space, Taking Shape",
-        description:
-            "Thoughtful code. Curious experiments. A new home for everything in between. Coming soon.",
+        description: TAGLINE,
         url: "https://himaiz.com",
-        siteName: "HiMaiz",
-        images: [
-            {
-                url: "/opengraph-image",
-                width: 1200,
-                height: 630,
-                alt: "HiMaiz coming soon preview with the Monolith M mark",
-            },
-        ],
-        locale: "en_US",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
         title: "Maiz Nadeem | A Personal Space, Taking Shape",
-        description: "Thoughtful code. Curious experiments. A personal space, taking shape.",
+        description: TAGLINE,
         images: ["/opengraph-image"],
     },
     robots: {
@@ -91,8 +81,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable} h-full`}>
-            <body className="min-h-full antialiased">{children}</body>
+        <html lang="en" className={`${fraunces.variable} h-full`}>
+            <body className="min-h-full antialiased">
+                <PaperFilter />
+                {children}
+            </body>
         </html>
     );
 }
