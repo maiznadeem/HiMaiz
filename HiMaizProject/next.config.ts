@@ -1,33 +1,14 @@
 import type { NextConfig } from "next";
 
+// A fully static export to `out/`, served by Cloudflare Workers static assets (wrangler.jsonc).
+// Security headers live in public/_headers and the /log redirect in public/_redirects, because
+// a static export has no server to apply next.config headers or redirects.
 const nextConfig: NextConfig = {
+    output: "export",
     agentRules: false,
     devIndicators: false,
     reactStrictMode: true,
     poweredByHeader: false,
-    async redirects() {
-        return [{ source: "/log", destination: "/", permanent: false }];
-    },
-    async headers() {
-        return [
-            {
-                source: "/(.*)",
-                headers: [
-                    { key: "X-Content-Type-Options", value: "nosniff" },
-                    { key: "X-Frame-Options", value: "DENY" },
-                    { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-                    {
-                        key: "Strict-Transport-Security",
-                        value: "max-age=63072000; includeSubDomains; preload",
-                    },
-                    {
-                        key: "Permissions-Policy",
-                        value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
-                    },
-                ],
-            },
-        ];
-    },
 };
 
 export default nextConfig;

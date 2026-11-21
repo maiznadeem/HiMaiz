@@ -2,7 +2,7 @@
     "name": "himaiz",
     "version": "0.1.0",
     "private": true,
-    "description": "Personal coming-soon site for Maiz, built with Next.js and deployed on Vercel.",
+    "description": "Personal site for Maiz, a static Next.js export served by Cloudflare Workers.",
     "packageManager": "npm@11.6.2",
     "engines": {
         "node": "24.x"
@@ -10,12 +10,15 @@
     "scripts": {
         "dev": "next dev --webpack",
         "build": "next build",
+        "postbuild": "node scripts/flatten-segments.mjs",
         "start": "next start",
         "lint": "eslint .",
         "typecheck": "tsc --noEmit",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "test": "vitest run"
+        "test": "vitest run",
+        "preview": "npm run build && wrangler dev",
+        "deploy": "npm run build && wrangler deploy && wrangler deploy -c edge/www/wrangler.jsonc"
     },
     "dependencies": {
         "gray-matter": "^4.0.3",
@@ -36,7 +39,8 @@
         "prettier": "^3.8.3",
         "tailwindcss": "^4.3.0",
         "typescript": "^6.0.3",
-        "vitest": "^5.1.1"
+        "vitest": "^5.1.1",
+        "wrangler": "^4.166.0"
     },
     "overrides": {
         "postcss": "^8.5.15"

@@ -1,12 +1,12 @@
 # HiMaiz
 
 Personal site for Maiz Nadeem at [himaiz.com](https://himaiz.com): a short home
-page, a work log and an RSS feed. Built with Next.js App Router and deployed on
-Vercel.
+page, a work log and an RSS feed. Built with Next.js App Router as a fully static export
+and served by Cloudflare Workers static assets.
 
 ## Stack
 
-- Next.js 16 (App Router, static generation)
+- Next.js 16 (App Router, `output: "export"`)
 - React 19
 - Tailwind CSS 4
 - TypeScript
@@ -14,6 +14,7 @@ Vercel.
 - Fraunces, loaded through `next/font/google`
 - `gray-matter`, `marked` and `zod` for the work log
 - npm
+- Cloudflare Workers static assets, deployed with Wrangler
 
 There is no 3D, canvas, analytics or animation library. The paper look is SVG
 shapes with an SVG filter and CSS.
@@ -109,9 +110,8 @@ Optional body in Markdown. Leave it empty for a one-line entry.
 - `summary` is one line of plain text. It is the text shown in the log, the
   entry page title and the RSS item title.
 
-**Drafts.** Entries with `draft: true` show up in `npm run dev` and in Vercel
-preview deploys (`VERCEL_ENV=preview`). They are hidden in production
-(`VERCEL_ENV=production`) and in a plain local `npm run build`.
+**Drafts.** Entries with `draft: true` show up in `npm run dev` only. They are
+hidden in every `npm run build`, so they never reach the live site.
 
 **Entry pages.** An entry gets its own page at `/log/<slug>`, and appears in the
 sitemap, when its body is not empty. An entry with no body only appears in the
@@ -119,5 +119,32 @@ log list and in the feed.
 
 ## Deployment
 
-Vercel auto-detects the Next.js app. `next.config.ts` adds baseline security
-headers. The RSS feed is served at `/log/rss.xml`.
+The site is a static export (`npm run build` writes `out/`) served by two Cloudflare Workers
+on the `himaiz.com` zone:
+
+- `himaiz-web` (`wrangler.jsonc`) serves `out/` on `himaiz.com` as static assets, with no
+  Worker script, so its requests don't count against the account's Worker quota.
+- `himaiz-www` (`edge/www/`) answers `www.himaiz.com` with a 308 to the same path on
+  `himaiz.com`.
+
+Both use custom domains, with no `*.workers.dev` or preview URLs. The zone's WAF rules sit in
+front of them.
+
+Static hosting has no server, so some behaviour lives in files Cloudflare reads from `out/`:
+
+- `public/_headers`: security headers (HSTS with preload, frame, referrer and
+  permissions policies), long caching for `/_next/static/*`, and content types for
+  `/opengraph-image`, `/apple-icon` and `/log/rss.xml`.
+- `public/_redirects`: `/log` goes to `/` (307).
+- `scripts/flatten-segments.mjs` runs after every build (`postbuild`). It copies Next's
+  nested route payloads to the flat file names the client router requests.
+
+Unknown paths get `out/404.html` with a 404 status. The RSS feed is served at
+`/log/rss.xml`.
+
+```bash
+npm run preview   # build, then serve out/ locally with wrangler dev
+npm run deploy    # build, then deploy both Workers (needs Wrangler logged in)
+```
+
+Deploys are run by hand for now. Pushing to `main` doesn't deploy.

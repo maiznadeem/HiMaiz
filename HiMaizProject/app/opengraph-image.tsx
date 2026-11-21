@@ -3,6 +3,8 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { LeafPebble } from "@/lib/og-art";
 
+export const dynamic = "force-static";
+
 export const alt = "Maiz Nadeem. A leaf and an orange pebble cut from paper.";
 export const contentType = "image/png";
 export const size = { width: 1200, height: 630 };
