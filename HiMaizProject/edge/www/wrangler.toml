@@ -1,0 +1,12 @@
+# www.himaiz.com: redirects every request to the same path on https://himaiz.com (308).
+# Kept apart from himaiz-web so the site itself stays script-free (static assets only).
+# Workers Builds: root HiMaizProject/, no build command, deploy `npx wrangler deploy -c edge/www/wrangler.toml`.
+name = "himaiz-www"
+main = "index.js"
+compatibility_date = "2026-11-01"
+workers_dev = false
+preview_urls = false
+routes = [{ pattern = "www.himaiz.com", custom_domain = true }]
+
+[observability]
+enabled = true

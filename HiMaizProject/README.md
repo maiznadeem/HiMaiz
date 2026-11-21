@@ -122,7 +122,7 @@ log list and in the feed.
 The site is a static export (`npm run build` writes `out/`) served by two Cloudflare Workers
 on the `himaiz.com` zone:
 
-- `himaiz-web` (`wrangler.jsonc`) serves `out/` on `himaiz.com` as static assets, with no
+- `himaiz-web` (`wrangler.toml`) serves `out/` on `himaiz.com` as static assets, with no
   Worker script, so its requests don't count against the account's Worker quota.
 - `himaiz-www` (`edge/www/`) answers `www.himaiz.com` with a 308 to the same path on
   `himaiz.com`.
@@ -142,9 +142,17 @@ Static hosting has no server, so some behaviour lives in files Cloudflare reads 
 Unknown paths get `out/404.html` with a 404 status. The RSS feed is served at
 `/log/rss.xml`.
 
+Pushes to `main` deploy through Cloudflare Workers Builds (Cloudflare's GitHub app). There are
+no GitHub Actions. Each Worker has its own build, both with root directory `HiMaizProject/`:
+
+| Worker       | Build command   | Deploy command                                  |
+| ------------ | --------------- | ----------------------------------------------- |
+| `himaiz-web` | `npm run build` | `npx wrangler deploy`                           |
+| `himaiz-www` | none            | `npx wrangler deploy -c edge/www/wrangler.toml` |
+
+Node 24 comes from `.node-version`. To deploy by hand or to try a build locally:
+
 ```bash
 npm run preview   # build, then serve out/ locally with wrangler dev
-npm run deploy    # build, then deploy both Workers (needs Wrangler logged in)
+npm run deploy    # build, then deploy both Workers (needs CLOUDFLARE_API_TOKEN)
 ```
-
-Deploys are run by hand for now. Pushing to `main` doesn't deploy.
