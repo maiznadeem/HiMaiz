@@ -77,10 +77,6 @@ describe("getLogEntry", () => {
 
 describe("shouldIncludeDrafts", () => {
     it("follows env", () => {
-        expect(shouldIncludeDrafts({ NODE_ENV: "production", VERCEL_ENV: "production" })).toBe(
-            false,
-        );
-        expect(shouldIncludeDrafts({ NODE_ENV: "production", VERCEL_ENV: "preview" })).toBe(true);
         expect(shouldIncludeDrafts({ NODE_ENV: "development" })).toBe(true);
         expect(shouldIncludeDrafts({ NODE_ENV: "production" })).toBe(false);
     });

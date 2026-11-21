@@ -52,8 +52,9 @@ const frontmatter = z.object({
     draft: z.boolean().default(false),
 });
 
+/** Drafts show only in `next dev`; every build (the static export that goes live) hides them. */
 export function shouldIncludeDrafts(env: NodeJS.ProcessEnv = process.env): boolean {
-    return env.NODE_ENV !== "production" || env.VERCEL_ENV === "preview";
+    return env.NODE_ENV !== "production";
 }
 
 // The entry title is the page's one h1, so a `#` in a body renders as h2.

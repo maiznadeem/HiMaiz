@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getLogEntries } from "@/lib/log";
 
+export const dynamic = "force-static";
+
 const ORIGIN = "https://himaiz.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
