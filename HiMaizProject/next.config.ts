@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-// A fully static export to `out/`, served by Cloudflare Workers static assets (wrangler.jsonc).
+// A fully static export to `out/`, served by Cloudflare Workers static assets (wrangler.toml).
 // Security headers live in public/_headers and the /log redirect in public/_redirects, because
 // a static export has no server to apply next.config headers or redirects.
 const nextConfig: NextConfig = {

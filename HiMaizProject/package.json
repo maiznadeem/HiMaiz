@@ -18,7 +18,7 @@
         "format:check": "prettier --check .",
         "test": "vitest run",
         "preview": "npm run build && wrangler dev",
-        "deploy": "npm run build && wrangler deploy && wrangler deploy -c edge/www/wrangler.jsonc"
+        "deploy": "npm run build && wrangler deploy && wrangler deploy -c edge/www/wrangler.toml"
     },
     "dependencies": {
         "gray-matter": "^4.0.3",
