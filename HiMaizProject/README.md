@@ -119,20 +119,21 @@ log list and in the feed.
 
 ## Deployment
 
+### Hosting and domains
+
 The site is a static export (`npm run build` writes `out/`) served by two Cloudflare Workers
 on the `himaiz.com` zone:
 
 - `himaiz-web` (`wrangler.toml`) serves `out/` on `himaiz.com` as static assets, with no
   Worker script, so its requests don't count against the account's Worker quota.
-- `himaiz-www` (`edge/www/`) answers `www.himaiz.com` with a 308 to the same path on
-  `himaiz.com`.
+- `himaiz-www` (`edge/www/`) answers `www.himaiz.com` with a 308 to the same path and query
+  on `himaiz.com`.
 
-Both use custom domains, with no `*.workers.dev` or preview URLs. The zone's WAF rules sit in
-front of them.
+Both use custom domains, with no `*.workers.dev` or preview URLs.
 
 Static hosting has no server, so some behaviour lives in files Cloudflare reads from `out/`:
 
-- `public/_headers`: security headers (HSTS with preload, frame, referrer and
+- `public/_headers`: security headers (HSTS with preload, `nosniff`, frame, referrer and
   permissions policies), long caching for `/_next/static/*`, and content types for
   `/opengraph-image`, `/apple-icon` and `/log/rss.xml`.
 - `public/_redirects`: `/log` goes to `/` (307).
@@ -142,8 +143,18 @@ Static hosting has no server, so some behaviour lives in files Cloudflare reads 
 Unknown paths get `out/404.html` with a 404 status. The RSS feed is served at
 `/log/rss.xml`.
 
-Pushes to `main` deploy through Cloudflare Workers Builds (Cloudflare's GitHub app). There are
-no GitHub Actions. Each Worker has its own build, both with root directory `HiMaizProject/`:
+### CI
+
+There are no GitHub Actions workflows. Pull requests run no checks, because Workers Builds
+only builds `main`. So run the [quality gates](#quality-gates) locally before opening a PR.
+
+On `main`, Workers Builds reports its own check on each commit it builds, for example
+`Workers Builds: himaiz-web`. The check fails if the build or the deploy fails.
+
+### CD
+
+Pushes to `main` deploy through Cloudflare Workers Builds (Cloudflare's GitHub app). Each
+Worker has its own build, both with root directory `HiMaizProject/`:
 
 | Worker       | Build command   | Deploy command                                  | Builds when this changes   |
 | ------------ | --------------- | ----------------------------------------------- | -------------------------- |
@@ -162,3 +173,35 @@ npm run preview   # build, then serve out/ locally with wrangler dev
 `npm run deploy` builds and deploys both Workers from your machine. Use it only as a fallback
 when Workers Builds is down: it needs `CLOUDFLARE_API_TOKEN`, and it can deploy changes that
 aren't on `main`.
+
+### Rollback
+
+Every deploy is a new Worker version, so you can return to an earlier one in either of two
+ways:
+
+- In the Cloudflare dashboard, open the Worker under Workers & Pages, then Deployments.
+- With Wrangler, which needs `CLOUDFLARE_API_TOKEN`. These commands act on `himaiz-web`;
+  add `-c edge/www/wrangler.toml` to both for `himaiz-www`.
+
+    ```bash
+    npx wrangler deployments list        # find the version to return to
+    npx wrangler rollback <version-id>
+    ```
+
+The next build from `main` deploys over a rollback, so revert the bad change on `main` too.
+
+### Cloudflare zone
+
+Both Workers sit behind the `himaiz.com` zone, which applies its TLS settings (Full strict,
+Always Use HTTPS), the Cloudflare managed WAF rules, and custom rules that block common
+scanner paths and unused HTTP methods. HiMaiz follows the zone's static-site pattern
+(Pattern B): Workers static assets, with headers in `public/_headers`.
+
+The zone's settings and WAF rules are shared by every project on it and managed centrally.
+They're recorded in `cloudflare/README.md` in the private repo `maiznadeem/OracleVMOps`.
+Change them there, never from this repo.
+
+### Bot protection
+
+None. The site has no forms and no sign-in (the email address is a copy button), so it needs
+no Turnstile or CAPTCHA.
