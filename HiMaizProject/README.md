@@ -14,7 +14,7 @@ and served by Cloudflare Workers static assets.
 - Fraunces, loaded through `next/font/google`
 - `gray-matter`, `marked` and `zod` for the work log
 - npm
-- Cloudflare Workers static assets, deployed with Wrangler
+- Cloudflare Workers static assets, deployed by Workers Builds
 
 There is no 3D, canvas, analytics or animation library. The paper look is SVG
 shapes with an SVG filter and CSS.
@@ -145,14 +145,20 @@ Unknown paths get `out/404.html` with a 404 status. The RSS feed is served at
 Pushes to `main` deploy through Cloudflare Workers Builds (Cloudflare's GitHub app). There are
 no GitHub Actions. Each Worker has its own build, both with root directory `HiMaizProject/`:
 
-| Worker       | Build command   | Deploy command                                  |
-| ------------ | --------------- | ----------------------------------------------- |
-| `himaiz-web` | `npm run build` | `npx wrangler deploy`                           |
-| `himaiz-www` | none            | `npx wrangler deploy -c edge/www/wrangler.toml` |
+| Worker       | Build command   | Deploy command                                  | Builds when this changes   |
+| ------------ | --------------- | ----------------------------------------------- | -------------------------- |
+| `himaiz-web` | `npm run build` | `npx wrangler deploy`                           | `HiMaizProject/*`          |
+| `himaiz-www` | none            | `npx wrangler deploy -c edge/www/wrangler.toml` | `HiMaizProject/edge/www/*` |
 
-Node 24 comes from `.node-version`. To deploy by hand or to try a build locally:
+Other branches don't build, so a change goes live when it's merged to `main`. Node 24
+comes from `.node-version`, and the builds need no environment variables.
+
+To try a build locally:
 
 ```bash
 npm run preview   # build, then serve out/ locally with wrangler dev
-npm run deploy    # build, then deploy both Workers (needs CLOUDFLARE_API_TOKEN)
 ```
+
+`npm run deploy` builds and deploys both Workers from your machine. Use it only as a fallback
+when Workers Builds is down: it needs `CLOUDFLARE_API_TOKEN`, and it can deploy changes that
+aren't on `main`.
