@@ -145,8 +145,10 @@ Unknown paths get `out/404.html` with a 404 status. The RSS feed is served at
 
 ### CI
 
-There are no GitHub Actions workflows. Pull requests run no checks, because Workers Builds
-only builds `main`. So run the [quality gates](#quality-gates) locally before opening a PR.
+There are no GitHub Actions workflows. Pull requests get one check, `GitGuardian Security
+Checks`, from the GitGuardian GitHub app, which scans the PR's commits for secrets. It isn't
+a required check. Nothing builds or tests a pull request, because Workers Builds only builds
+`main`, so run the [quality gates](#quality-gates) locally before opening a PR.
 
 On `main`, Workers Builds reports its own check on each commit it builds, for example
 `Workers Builds: himaiz-web`. The check fails if the build or the deploy fails.
