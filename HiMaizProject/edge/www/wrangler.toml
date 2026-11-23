@@ -8,5 +8,11 @@ workers_dev = false
 preview_urls = false
 routes = [{ pattern = "www.himaiz.com", custom_domain = true }]
 
+# Workers Logs off: they would store every visitor's full URL, query string included,
+# and there is no code here worth logging.
 [observability]
-enabled = true
+enabled = false
+
+[observability.logs]
+enabled = false
+invocation_logs = false

@@ -129,7 +129,8 @@ on the `himaiz.com` zone:
 - `himaiz-www` (`edge/www/`) answers `www.himaiz.com` with a 308 to the same path and query
   on `himaiz.com`.
 
-Both use custom domains, with no `*.workers.dev` or preview URLs.
+Both use custom domains, with no `*.workers.dev` or preview URLs. Workers Logs
+(observability) is off for both, so visitors' URLs and query strings aren't stored.
 
 Static hosting has no server, so some behaviour lives in files Cloudflare reads from `out/`:
 
