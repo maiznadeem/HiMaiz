@@ -1,0 +1,44 @@
+[
+    {
+        "text": "The owner asked to start, pause and stop every service, and read its logs.",
+        "pauseAfterMs": 400
+    },
+    { "text": "None of that existed.", "pauseAfterMs": 600 },
+    {
+        "text": "So first, every service writes the same kind of log, in rolling files tagged by app.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Then I added a small supervisor that depends on none of the apps.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "It reports each service's state, CPU, memory and uptime.",
+        "say": "It reports each service's state, C P U, memory and uptime.",
+        "pauseAfterMs": 300
+    },
+    { "text": "It starts and stops them, and streams their logs live.", "pauseAfterMs": 300 },
+    {
+        "text": "Because it stands apart, it still answers when an app won't start.",
+        "pauseAfterMs": 600
+    },
+    {
+        "text": "Pausing the workers is a row in the database, not a signal or a file.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Flip it, and the whole fleet pauses together, while the study in flight finishes.",
+        "pauseAfterMs": 500
+    },
+    { "text": "An Operations page puts all of it in one place, live.", "pauseAfterMs": 600 },
+    { "text": "Then I cleaned up the cloud.", "pauseAfterMs": 300 },
+    {
+        "text": "Hosting and monitoring that had never served a user were deleted.",
+        "pauseAfterMs": 400
+    },
+    { "text": "Deploys became one job, with a rollback.", "pauseAfterMs": 300 },
+    {
+        "text": "Push to live went from about fifteen minutes to thirty-five seconds.",
+        "pauseAfterMs": 900
+    }
+]

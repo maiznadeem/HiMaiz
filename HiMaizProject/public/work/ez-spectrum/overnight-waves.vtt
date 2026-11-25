@@ -1,0 +1,73 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:06.590
+In one night, I sent six waves of AI
+coding agents across the whole platform.
+
+2
+00:00:06.990 --> 00:00:11.093
+Each wave had a job: speed,
+bugs, dead code, or structure.
+
+3
+00:00:11.493 --> 00:00:16.033
+Agents write code fast, so every
+change had to pass the same rules.
+
+4
+00:00:16.533 --> 00:00:19.902
+Measure first, with the same
+harness before and after.
+
+5
+00:00:20.202 --> 00:00:23.307
+At least five runs, with
+the median and the spread.
+
+6
+00:00:23.707 --> 00:00:28.322
+The outputs must be identical, checked
+against saved fixtures and hashes.
+
+7
+00:00:28.722 --> 00:00:32.311
+Every bug fix comes with a test
+that fails on the old code.
+
+8
+00:00:32.711 --> 00:00:35.075
+Production is only read, never written.
+
+9
+00:00:35.375 --> 00:00:39.363
+And everything lands on a preview
+branch, for a person to merge.
+
+10
+00:00:39.963 --> 00:00:41.484
+Here's some of what came back.
+
+11
+00:00:41.784 --> 00:00:46.969
+File downloads went from
+837 milliseconds to 45.
+
+12
+00:00:47.369 --> 00:00:53.624
+Time lost to memory clean-up fell
+from 27.5 percent of a run to 9.3.
+
+13
+00:00:54.024 --> 00:01:01.506
+The home page on a phone shows its main
+content in 1.98 seconds, down from 3.26.
+
+14
+00:01:01.906 --> 00:01:04.008
+Security bugs were found and fixed.
+
+15
+00:01:04.308 --> 00:01:07.903
+And the build now fails if any
+endpoint has no access check.

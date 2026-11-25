@@ -1,0 +1,87 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:03.801
+A frequency study answers one question.
+
+2
+00:00:04.101 --> 00:00:05.981
+Can a new radio site use this
+
+3
+00:00:05.981 --> 00:00:09.899
+channel without interfering
+with anyone licensed nearby?
+
+4
+00:00:10.399 --> 00:00:13.179
+It finds every nearby licensee,
+
+5
+00:00:13.179 --> 00:00:17.913
+draws their protected areas and the new
+site's reach, and checks the overlaps.
+
+6
+00:00:18.313 --> 00:00:22.765
+A project is thousands of these:
+every site, times every channel.
+
+7
+00:00:23.165 --> 00:00:30.668
+On one project of 7,630 studies, the
+web tool it replaced needed 96 minutes.
+
+8
+00:00:31.268 --> 00:00:36.607
+I rebuilt how studies run, with one rule:
+every answer must match the old tool.
+
+9
+00:00:37.107 --> 00:00:40.259
+Studies now wait in a
+queue inside the database.
+
+10
+00:00:40.459 --> 00:00:44.861
+Each worker claims one and holds a
+lease, so any machine can join in.
+
+11
+00:00:45.261 --> 00:00:48.342
+One shared worker pool
+replaced a pool per group.
+
+12
+00:00:48.742 --> 00:00:53.685
+Searching a state's border for
+licensees took 26.6 seconds.
+
+13
+00:00:53.985 --> 00:00:57.580
+Cut into small pieces, the border
+takes a third of a second.
+
+14
+00:00:58.080 --> 00:01:01.980
+A cloud database would have turned
+a ten-minute run into days,
+
+15
+00:01:01.980 --> 00:01:04.379
+so the engine stays next to its data.
+
+16
+00:01:04.979 --> 00:01:10.361
+The same 7,630 studies now
+finish in under three minutes.
+
+17
+00:01:10.661 --> 00:01:13.953
+That's 33 times faster,
+with the same answers.
+
+18
+00:01:14.553 --> 00:01:23.400
+In production, one 96-core server ran
+151,214 studies in about 40 minutes.

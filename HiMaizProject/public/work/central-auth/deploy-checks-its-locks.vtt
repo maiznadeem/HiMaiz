@@ -1,0 +1,76 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:04.260
+Every one of my apps signs
+in through one server.
+
+2
+00:00:04.560 --> 00:00:07.325
+If that server is wrong,
+every app is wrong.
+
+3
+00:00:07.825 --> 00:00:10.254
+A sign-in server set up by hand drifts.
+
+4
+00:00:10.554 --> 00:00:15.455
+And an upgrade can quietly bring back
+a default sign-in flow, a second,
+
+5
+00:00:15.455 --> 00:00:16.422
+weaker way in.
+
+6
+00:00:16.922 --> 00:00:19.059
+So nothing here is set up by hand.
+
+7
+00:00:19.359 --> 00:00:24.038
+One file, over fifteen hundred lines
+long, describes the whole server.
+
+8
+00:00:24.538 --> 00:00:26.863
+But a file only says what should be true.
+
+9
+00:00:27.163 --> 00:00:32.990
+So after every deploy, a check runs inside
+the server, against the live database.
+
+10
+00:00:33.390 --> 00:00:35.400
+It tests thirty-seven promises.
+
+11
+00:00:35.700 --> 00:00:37.998
+Only my own sign-in flows exist.
+
+12
+00:00:38.198 --> 00:00:41.407
+Every app sends people back
+to an exact secure address.
+
+13
+00:00:41.607 --> 00:00:43.691
+No app is open to every account.
+
+14
+00:00:43.891 --> 00:00:45.965
+There is exactly one administrator.
+
+15
+00:00:46.465 --> 00:00:50.347
+When all thirty-seven hold,
+it prints invariants OK.
+
+16
+00:00:50.847 --> 00:00:53.059
+Now slip one default flow back in.
+
+17
+00:00:53.359 --> 00:00:56.371
+One lock stays open, and the deploy fails.

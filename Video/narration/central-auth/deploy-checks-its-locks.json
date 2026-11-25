@@ -1,0 +1,67 @@
+[
+    {
+        "text": "Every one of my apps signs in through one server.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "If that server is wrong, every app is wrong.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "A sign-in server set up by hand drifts.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "And an upgrade can quietly bring back a default sign-in flow, a second, weaker way in.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "So nothing here is set up by hand.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "One file, over fifteen hundred lines long, describes the whole server.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "But a file only says what should be true.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "So after every deploy, a check runs inside the server, against the live database.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "It tests thirty-seven promises.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Only my own sign-in flows exist.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "Every app sends people back to an exact secure address.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "No app is open to every account.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "There is exactly one administrator.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "When all thirty-seven hold, it prints invariants OK.",
+        "say": "When all thirty-seven hold, it prints: invariants, O K.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "Now slip one default flow back in.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "One lock stays open, and the deploy fails.",
+        "pauseAfterMs": 800
+    }
+]

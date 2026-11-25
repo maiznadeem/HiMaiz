@@ -1,0 +1,22 @@
+[
+    {
+        "text": "This is a short explainer, made from a script and a kit of paper pieces.",
+        "pauseAfterMs": 350
+    },
+    {
+        "text": "Each spoken line drives the picture, so this number counts as I say it.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Requests flow from the phones, through the edge, to the server. When too many arrive at once, the edge turns some of them away, and the server keeps up.",
+        "pauseAfterMs": 350
+    },
+    {
+        "text": "Before, every moment was typed as a frame number. Now the words set the pace.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Change the script, run one command, and the scene is timed again.",
+        "pauseAfterMs": 0
+    }
+]

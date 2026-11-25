@@ -1,0 +1,54 @@
+[
+    {
+        "text": "A campaign needs ten jobs done in order, and most of them call an outside service that can fail.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "So it runs as one Cloudflare Workflow, with each job as its own step.",
+        "pauseAfterMs": 400
+    },
+    { "text": "Step one checks the request.", "pauseAfterMs": 200 },
+    {
+        "text": "Step two reads recent campaigns, so the next one doesn't repeat them.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "Step three searches the web for what's happening locally right now.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "Step four, which I wrote, turns a trend into a topical post instead of a sales pitch.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "Steps five and six make an image and a short video with AI models, and store them.",
+        "pauseAfterMs": 200
+    },
+    { "text": "Step seven saves one campaign for each store.", "pauseAfterMs": 200 },
+    {
+        "text": "Steps eight and nine post it to Instagram, Reels included, and to X.",
+        "pauseAfterMs": 200
+    },
+    { "text": "Step ten records where everything went.", "pauseAfterMs": 500 },
+    { "text": "Every finished step saves its result.", "pauseAfterMs": 250 },
+    {
+        "text": "When a step fails, it retries on its own, up to two or three times, waiting longer each time.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "So if the Instagram post fails, only the Instagram step runs again.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "The trend search, the post, the image and the video are not made twice.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "For testing, a sandbox mode jumps straight to the media steps and posts nothing.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "I reworked most of these steps, from the trend search to the posts.",
+        "pauseAfterMs": 600
+    }
+]

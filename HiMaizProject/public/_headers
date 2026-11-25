@@ -6,6 +6,11 @@
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
 
+# The work pages are being built in the open. Keep them out of search results until they are signed off,
+# then delete this rule.
+/work*
+  X-Robots-Tag: noindex
+
 # Hashed build files never change.
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable

@@ -1,0 +1,63 @@
+[
+    {
+        "text": "Every episode of a show has an intro, and nothing tells you where it is.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "I wanted a skip intro button anyway, so Watch listens for it.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "It turns the audio into one channel at eight kilohertz.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Thirty-one times a second, it checks how the loudness shifts between neighbouring pitches.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Thirty-three bands, from the low end of a voice to the top of it.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Each moment becomes a thirty-two bit hash, a tiny barcode of the sound.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "It's written in plain Node, because the ffmpeg build had no fingerprint library.",
+        "say": "It's written in plain Node, because the F F mpeg build had no fingerprint library.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "Now take two episodes from the same season.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Watch slides one barcode strip past the other.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Where the same theme song plays, the hashes line up and light up.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "One match could be luck, so other episodes vote.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "The stretch most of them share is the intro.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "If only one episode agrees, it gets flagged instead of trusted.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "Finally the edges snap to the nearest cut in the picture.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Skip intro lands right where the story starts, with nobody marking a thing.",
+        "pauseAfterMs": 800
+    }
+]

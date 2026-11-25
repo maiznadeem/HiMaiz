@@ -1,0 +1,55 @@
+import { grain } from "./texture";
+import type { Theme } from "./types";
+
+/** Qoria: the site's own look. Stone paper, ink, orange, a sage leaf. Calm, smooth, eased. */
+export const qoria: Theme = {
+    name: "qoria",
+    bg: "#e7e7e2",
+    onBg: "#191919",
+    onBgSoft: "#55544f",
+    paper: "#f7f6f1",
+    paperAlt: "#d9d8d0",
+    ink: "#191919",
+    inkSoft: "#5b5a55",
+    accent: "#ff4f1a",
+    second: "#5d7d4f",
+    third: "#c8c5b8",
+    shadow: "rgba(25, 25, 25, 0.28)",
+    shadowOffset: [6, 9],
+    shadowBlur: 0,
+    texture: "grain",
+    pageLayers: [grain(0, 0.07)],
+    vignette: "radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.18), rgba(0,0,0,0.08))",
+    onAccent: "#fffaf2",
+    tape: "rgba(244, 237, 220, 0.75)",
+    vein: "rgba(0,0,0,0.25)",
+    fonts: { display: "Fraunces", body: "Fraunces", label: "Fraunces", mono: "IBM Plex Mono" },
+    labelWeight: 400,
+    labelStyle: "italic",
+    labelTransform: "none",
+    motion: {
+        step: 1,
+        damping: 20,
+        stiffness: 80,
+        mass: 1,
+        wobbleDeg: 0.6,
+        wobbleHz: 0.18,
+        boil: false,
+        enter: "rise",
+    },
+    music: {
+        // Dmaj9, Bm9, Gmaj9, A6sus: warm, slow lo-fi.
+        chords: [
+            [50, 57, 61, 64, 66],
+            [47, 54, 57, 61, 62],
+            [43, 50, 54, 57, 62],
+            [45, 52, 54, 59, 62],
+        ],
+        bpm: 72,
+        barsPerChord: 1,
+        timbre: "rhodes",
+        pulse: true,
+        sparkle: 0.35,
+        air: 0.5,
+    },
+};

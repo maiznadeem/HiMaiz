@@ -3,6 +3,11 @@ import { Fraunces } from "next/font/google";
 import { PaperFilter } from "@/components/PaperFilter";
 import { OPEN_GRAPH_BASE, RSS_ALTERNATE, TAGLINE } from "@/lib/site";
 import "./globals.css";
+import "./work.css";
+
+// Marks the page as scripted before it paints, so pieces that pop up on scroll start folded
+// instead of flashing in first. Without JavaScript the class never appears and all is visible.
+const MARK_JS = "document.documentElement.classList.add('js')";
 
 const fraunces = Fraunces({
     subsets: ["latin"],
@@ -81,7 +86,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${fraunces.variable} h-full`}>
+        <html lang="en" className={`${fraunces.variable} h-full`} suppressHydrationWarning>
+            <head>
+                <script dangerouslySetInnerHTML={{ __html: MARK_JS }} />
+            </head>
             <body className="min-h-full antialiased">
                 <PaperFilter />
                 {children}

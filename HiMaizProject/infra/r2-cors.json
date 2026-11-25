@@ -1,0 +1,19 @@
+{
+    "rules": [
+        {
+            "allowed": {
+                "origins": [
+                    "https://himaiz.com",
+                    "http://localhost:3000",
+                    "http://127.0.0.1:4330",
+                    "http://127.0.0.1:4311",
+                    "http://127.0.0.1:4409"
+                ],
+                "methods": ["GET", "HEAD"],
+                "headers": ["Range"]
+            },
+            "exposeHeaders": ["Content-Length", "Content-Range", "Accept-Ranges"],
+            "maxAgeSeconds": 86400
+        }
+    ]
+}

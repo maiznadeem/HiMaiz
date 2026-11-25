@@ -1,0 +1,52 @@
+[
+    {
+        "text": "An agent is a program that reads a request, picks its own tools, and uses them.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Our campaign pipelines were separate jobs, and someone had to start each with the right settings.",
+        "pauseAfterMs": 400
+    },
+    { "text": "I designed and built one agent to sit in front of them all.", "pauseAfterMs": 500 },
+    {
+        "text": "You send it one plain-English sentence, like: schedule a marketing campaign for the next day.",
+        "pauseAfterMs": 300
+    },
+    { "text": "The agent sets that sentence beside its four tools.", "pauseAfterMs": 250 },
+    {
+        "text": "Create a campaign, scrape product data, search web trends, check a running job.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "A language model running on Cloudflare reads both, and answers with a plan in JSON.",
+        "say": "A language model running on Cloudflare reads both, and answers with a plan in jay-son.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "Each action names a tool, its settings, and the reason for it.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "The agent pulls the plan out of the reply and checks each tool name.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "Then it starts each job as a Cloudflare Workflow, which saves its progress step by step.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "It sends back its decision trail, so you can see what it chose and why.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "I also published it as an MCP server, the standard way AI tools call each other.",
+        "say": "I also published it as an M C P server, the standard way AI tools call each other.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "Other agents and Claude clients reach it over SSE, HTTP, or RPC.",
+        "say": "Other agents and Claude clients reach it over S S E, H T T P, or R P C.",
+        "pauseAfterMs": 400
+    },
+    { "text": "The new scheduler hands its jobs to it too.", "pauseAfterMs": 600 }
+]

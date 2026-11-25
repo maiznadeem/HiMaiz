@@ -1,0 +1,9 @@
+node_modules/
+# Voice cache, music, mixes, intermediate renders and frames.
+.cache/
+out/
+# Local pointer to the voice environment (outside the repo).
+.video-env
+# Sample renders: only the posters are kept in git.
+samples/**/*.mp4
+samples/**/*.vtt

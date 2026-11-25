@@ -1,0 +1,80 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:05.710
+Every episode of a show has an intro,
+and nothing tells you where it is.
+
+2
+00:00:06.110 --> 00:00:10.006
+I wanted a skip intro button
+anyway, so Watch listens for it.
+
+3
+00:00:10.506 --> 00:00:13.808
+It turns the audio into one
+channel at eight kilohertz.
+
+4
+00:00:14.108 --> 00:00:15.619
+Thirty-one times a second,
+
+5
+00:00:15.619 --> 00:00:19.281
+it checks how the loudness shifts
+between neighbouring pitches.
+
+6
+00:00:19.581 --> 00:00:23.375
+Thirty-three bands, from the low
+end of a voice to the top of it.
+
+7
+00:00:23.675 --> 00:00:28.509
+Each moment becomes a thirty-two bit
+hash, a tiny barcode of the sound.
+
+8
+00:00:29.009 --> 00:00:34.649
+It's written in plain Node, because the
+ffmpeg build had no fingerprint library.
+
+9
+00:00:35.149 --> 00:00:37.781
+Now take two episodes
+from the same season.
+
+10
+00:00:38.081 --> 00:00:40.868
+Watch slides one barcode
+strip past the other.
+
+11
+00:00:41.168 --> 00:00:45.109
+Where the same theme song plays,
+the hashes line up and light up.
+
+12
+00:00:45.609 --> 00:00:48.713
+One match could be luck,
+so other episodes vote.
+
+13
+00:00:49.013 --> 00:00:51.413
+The stretch most of them
+share is the intro.
+
+14
+00:00:51.713 --> 00:00:55.898
+If only one episode agrees, it
+gets flagged instead of trusted.
+
+15
+00:00:56.398 --> 00:00:59.590
+Finally the edges snap to the
+nearest cut in the picture.
+
+16
+00:00:59.990 --> 00:01:04.813
+Skip intro lands right where the story
+starts, with nobody marking a thing.

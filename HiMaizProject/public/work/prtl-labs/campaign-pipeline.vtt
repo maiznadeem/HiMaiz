@@ -1,0 +1,90 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:03.860
+A campaign needs ten jobs done in order,
+
+2
+00:00:03.860 --> 00:00:07.517
+and most of them call an
+outside service that can fail.
+
+3
+00:00:07.917 --> 00:00:12.681
+So it runs as one Cloudflare Workflow,
+with each job as its own step.
+
+4
+00:00:13.081 --> 00:00:14.839
+Step one checks the request.
+
+5
+00:00:15.039 --> 00:00:19.515
+Step two reads recent campaigns, so
+the next one doesn't repeat them.
+
+6
+00:00:19.715 --> 00:00:23.562
+Step three searches the web for
+what's happening locally right now.
+
+7
+00:00:23.762 --> 00:00:25.408
+Step four, which I wrote,
+
+8
+00:00:25.408 --> 00:00:29.293
+turns a trend into a topical
+post instead of a sales pitch.
+
+9
+00:00:29.543 --> 00:00:35.086
+Steps five and six make an image and a
+short video with AI models, and store them.
+
+10
+00:00:35.286 --> 00:00:38.257
+Step seven saves one
+campaign for each store.
+
+11
+00:00:38.457 --> 00:00:43.184
+Steps eight and nine post it to
+Instagram, Reels included, and to X.
+
+12
+00:00:43.384 --> 00:00:45.624
+Step ten records where everything went.
+
+13
+00:00:46.124 --> 00:00:48.230
+Every finished step saves its result.
+
+14
+00:00:48.480 --> 00:00:52.883
+When a step fails, it retries on
+its own, up to two or three times,
+
+15
+00:00:52.883 --> 00:00:54.525
+waiting longer each time.
+
+16
+00:00:54.825 --> 00:00:59.630
+So if the Instagram post fails,
+only the Instagram step runs again.
+
+17
+00:00:59.880 --> 00:01:04.216
+The trend search, the post, the image
+and the video are not made twice.
+
+18
+00:01:04.616 --> 00:01:09.697
+For testing, a sandbox mode jumps straight
+to the media steps and posts nothing.
+
+19
+00:01:10.098 --> 00:01:13.950
+I reworked most of these steps,
+from the trend search to the posts.

@@ -1,0 +1,86 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:06.871
+A statewide radio project needed
+836 license-plan reports.
+
+2
+00:00:07.271 --> 00:00:11.810
+Each one is a PDF, built from the
+results of the project's studies.
+
+3
+00:00:12.110 --> 00:00:19.799
+The project held 185,161 studies
+and over eight million results.
+
+4
+00:00:20.199 --> 00:00:24.819
+One plan took more than ten minutes,
+because it scanned the whole results table,
+
+5
+00:00:24.819 --> 00:00:26.744
+over a billion rows.
+
+6
+00:00:27.144 --> 00:00:35.133
+Scanning twice per plan, one at a time,
+all 836 would have taken about 280 hours.
+
+7
+00:00:35.833 --> 00:00:40.784
+First I measured where a plan's time
+went, and most of it was loading results.
+
+8
+00:00:41.184 --> 00:00:46.044
+So each plan now finds its studies
+first and reads only their results,
+
+9
+00:00:46.044 --> 00:00:47.255
+not the whole table.
+
+10
+00:00:47.555 --> 00:00:50.126
+One plan dropped to 20.8 seconds.
+
+11
+00:00:50.626 --> 00:00:55.303
+Then one pass over the studies finds
+the results for every plan at once.
+
+12
+00:00:55.603 --> 00:00:57.883
+Each contour is prepared once,
+
+13
+00:00:57.883 --> 00:01:01.131
+instead of once for every
+licensee it's checked against.
+
+14
+00:01:01.531 --> 00:01:06.850
+Instead of adding a proposed eight-gigabyte
+index, I narrowed what each plan reads.
+
+15
+00:01:07.250 --> 00:01:11.066
+Then one background job builds
+the plans sixteen at a time.
+
+16
+00:01:11.366 --> 00:01:15.591
+It shows progress, lists any failure
+by plan, and can be cancelled.
+
+17
+00:01:16.091 --> 00:01:20.492
+All 836 plans finished
+in about twelve minutes.
+
+18
+00:01:20.892 --> 00:01:22.598
+That's under a second per plan.

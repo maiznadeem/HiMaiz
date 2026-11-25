@@ -1,0 +1,72 @@
+{
+    "/work/argus/unknown-is-not-a-pass.mp4": {
+        "bytes": 5106934,
+        "sha256": "01548f322ad85c4ca9437b10ba1fe75e82ae5181f87dbb68ea07faffb531a247",
+        "seconds": 54
+    },
+    "/work/central-auth/deploy-checks-its-locks.mp4": {
+        "bytes": 5452334,
+        "sha256": "58648ca7f2e016ec5fa71b705045e1df7f611f697b917a4aa0cb336fb81d56cb",
+        "seconds": 58
+    },
+    "/work/ez-spectrum/operations.mp4": {
+        "bytes": 5554803,
+        "sha256": "db24ae7d8b5c4c65a7e044c6aeec074722775e81ad2cd6c689159b8cd2c59613",
+        "seconds": 61
+    },
+    "/work/ez-spectrum/overnight-waves.mp4": {
+        "bytes": 5595346,
+        "sha256": "a6c207938b3f8ba714283aecc016227282cf0565ad756638d6c4e2caddf36a91",
+        "seconds": 70
+    },
+    "/work/ez-spectrum/plan-reports.mp4": {
+        "bytes": 5677236,
+        "sha256": "6e4ff61dd8eda4218439d9cda7c9b558fb5bf2a1806e2fdd840773618063aa59",
+        "seconds": 85
+    },
+    "/work/ez-spectrum/study-engine.mp4": {
+        "bytes": 5917199,
+        "sha256": "a72faeb26aa207c358a29618ee472bd7d8291cac2dc3789933ef7c8bbff16329",
+        "seconds": 85
+    },
+    "/work/helphive/refunds-itself.mp4": {
+        "bytes": 5618147,
+        "sha256": "8f48c74d5c94479b0c74e16342ca31a098e391d4c6dea7af1909a9a683b85a2c",
+        "seconds": 68
+    },
+    "/work/prtl-labs/campaign-pipeline.mp4": {
+        "bytes": 5733255,
+        "sha256": "01330c095a299288f3b4df5f316aad53a41a953f3f60ec20617299b1a6d95947",
+        "seconds": 76
+    },
+    "/work/prtl-labs/scheduler.mp4": {
+        "bytes": 5685122,
+        "sha256": "0a1ed92535f77c7699097c8d0cd7df181d27898e5f19ff6bd305366fd07e4ed1",
+        "seconds": 77
+    },
+    "/work/prtl-labs/workflow-agent.mp4": {
+        "bytes": 5676978,
+        "sha256": "0d714593cd1aa8b6f51d96703eaa2b4074e75c316c67bc52482d4adaa953dc49",
+        "seconds": 74
+    },
+    "/work/qoria/half-the-work.mp4": {
+        "bytes": 6763362,
+        "sha256": "0f80777524388dbd7c9011eb95710602a5933b1a693c2e563ebf5c03bf5194ac",
+        "seconds": 76
+    },
+    "/work/qoria/how-i-work.mp4": {
+        "bytes": 5429276,
+        "sha256": "a75a3d448ba9b3aa495ea68c2df2181c223d60ab2f94e4fbc8f44f2c2a6f734f",
+        "seconds": 70
+    },
+    "/work/summa/statement-must-add-up.mp4": {
+        "bytes": 5601202,
+        "sha256": "4ce45439e73430e15f99baddbe4abd14f1b42c104ad1efc70017cf9b56c3b093",
+        "seconds": 64
+    },
+    "/work/watch/finding-the-intro.mp4": {
+        "bytes": 5244790,
+        "sha256": "b2b48059f162714131b84a9beb2308361b9e20e3d3ef003ecc1f032b64774d8d",
+        "seconds": 67
+    }
+}

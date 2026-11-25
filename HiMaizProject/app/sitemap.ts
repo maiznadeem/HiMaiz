@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getLogEntries } from "@/lib/log";
+import { getWorkStudies } from "@/lib/work";
 
 export const dynamic = "force-static";
 
@@ -17,5 +18,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...entries
             .filter((entry) => entry.hasPage)
             .map((entry) => ({ url: `${ORIGIN}/log/${entry.slug}`, lastModified: entry.date })),
+        { url: `${ORIGIN}/work`, changeFrequency: "monthly", priority: 0.9 },
+        ...getWorkStudies().map((study) => ({
+            url: `${ORIGIN}/work/${study.slug}`,
+            changeFrequency: "monthly" as const,
+        })),
     ];
 }
