@@ -1,0 +1,55 @@
+[
+    { "text": "A frequency study answers one question.", "pauseAfterMs": 300 },
+    {
+        "text": "Can a new radio site use this channel without interfering with anyone licensed nearby?",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "It finds every nearby licensee, draws their protected areas and the new site's reach, and checks the overlaps.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "A project is thousands of these: every site, times every channel.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "On one project of 7,630 studies, the web tool it replaced needed 96 minutes.",
+        "say": "On one project of seven thousand six hundred and thirty studies, the web tool it replaced needed ninety-six minutes.",
+        "pauseAfterMs": 600
+    },
+    {
+        "text": "I rebuilt how studies run, with one rule: every answer must match the old tool.",
+        "pauseAfterMs": 500
+    },
+    { "text": "Studies now wait in a queue inside the database.", "pauseAfterMs": 200 },
+    {
+        "text": "Each worker claims one and holds a lease, so any machine can join in.",
+        "pauseAfterMs": 400
+    },
+    { "text": "One shared worker pool replaced a pool per group.", "pauseAfterMs": 400 },
+    {
+        "text": "Searching a state's border for licensees took 26.6 seconds.",
+        "say": "Searching a state's border for licensees took twenty-six point six seconds.",
+        "pauseAfterMs": 300
+    },
+    { "text": "Cut into small pieces, the border takes a third of a second.", "pauseAfterMs": 500 },
+    {
+        "text": "A cloud database would have turned a ten-minute run into days, so the engine stays next to its data.",
+        "pauseAfterMs": 600
+    },
+    {
+        "text": "The same 7,630 studies now finish in under three minutes.",
+        "say": "The same seven thousand six hundred and thirty studies now finish in under three minutes.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "That's 33 times faster, with the same answers.",
+        "say": "That's thirty-three times faster, with the same answers.",
+        "pauseAfterMs": 600
+    },
+    {
+        "text": "In production, one 96-core server ran 151,214 studies in about 40 minutes.",
+        "say": "In production, one ninety-six core server ran a hundred and fifty-one thousand, two hundred and fourteen studies in about forty minutes.",
+        "pauseAfterMs": 900
+    }
+]

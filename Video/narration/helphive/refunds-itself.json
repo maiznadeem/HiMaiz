@@ -1,0 +1,58 @@
+[
+    {
+        "text": "A hotel books a housekeeper for a morning shift, and pays up front.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Two things can go wrong.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Nobody accepts the job.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "Or someone accepts it, and never shows up.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "For the first, every booking has a timer in the cloud, set for its start time.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "If nobody has accepted by then, the booking cancels itself and the money goes back.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "When I came back to it later, I found an accepted job that never started just stayed open, with the hotel's money held.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "So I added a no-show rule.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "When a provider accepts, a second timer is set for the end of the shift, plus a grace period.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "If the job never started, the booking is cancelled and refunded.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Nobody gets a strike for it, because nobody chose to cancel.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "One more catch: the cloud's task service won't schedule anything more than thirty days ahead.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "So a timer for a booking further out wakes at twenty-nine days, sees it's early, and sets itself again.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "No booking can get stuck, and nobody has to watch the clock.",
+        "pauseAfterMs": 800
+    }
+]

@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:06.400
+An agent is a program that reads a request,
+picks its own tools, and uses them.
+
+2
+00:00:06.800 --> 00:00:09.248
+Our campaign pipelines were separate jobs,
+
+3
+00:00:09.248 --> 00:00:12.396
+and someone had to start each
+with the right settings.
+
+4
+00:00:12.796 --> 00:00:16.213
+I designed and built one agent
+to sit in front of them all.
+
+5
+00:00:16.713 --> 00:00:19.590
+You send it one plain-English
+sentence, like:
+
+6
+00:00:19.590 --> 00:00:22.594
+schedule a marketing
+campaign for the next day.
+
+7
+00:00:22.894 --> 00:00:25.793
+The agent sets that sentence
+beside its four tools.
+
+8
+00:00:26.043 --> 00:00:31.136
+Create a campaign, scrape product data,
+search web trends, check a running job.
+
+9
+00:00:31.436 --> 00:00:37.135
+A language model running on Cloudflare reads
+both, and answers with a plan in JSON.
+
+10
+00:00:37.385 --> 00:00:41.182
+Each action names a tool, its
+settings, and the reason for it.
+
+11
+00:00:41.482 --> 00:00:45.844
+The agent pulls the plan out of the
+reply and checks each tool name.
+
+12
+00:00:46.094 --> 00:00:49.251
+Then it starts each job
+as a Cloudflare Workflow,
+
+13
+00:00:49.251 --> 00:00:51.700
+which saves its progress step by step.
+
+14
+00:00:52.000 --> 00:00:56.267
+It sends back its decision trail, so
+you can see what it chose and why.
+
+15
+00:00:56.767 --> 00:01:02.764
+I also published it as an MCP server, the
+standard way AI tools call each other.
+
+16
+00:01:03.014 --> 00:01:09.248
+Other agents and Claude clients
+reach it over SSE, HTTP, or RPC.
+
+17
+00:01:09.648 --> 00:01:12.299
+The new scheduler hands
+its jobs to it too.

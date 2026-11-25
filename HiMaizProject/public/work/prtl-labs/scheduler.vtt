@@ -1,0 +1,84 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:05.050
+Scheduled posts used to sit in
+a list in a key-value store.
+
+2
+00:00:05.300 --> 00:00:09.691
+A cron job woke every minute to
+sweep it and run whatever was due.
+
+3
+00:00:10.091 --> 00:00:13.863
+Cloudflare has a better way
+to wait: a Durable Object,
+
+4
+00:00:13.863 --> 00:00:17.355
+a small program with its
+own storage and an alarm.
+
+5
+00:00:17.655 --> 00:00:22.456
+The catch is that each Durable Object
+can hold only one alarm at a time.
+
+6
+00:00:22.756 --> 00:00:27.504
+So one scheduler object can't wait for
+three posts at three different times.
+
+7
+00:00:28.004 --> 00:00:31.867
+I rebuilt the scheduler to create
+a new object for every task.
+
+8
+00:00:32.267 --> 00:00:37.077
+You ask it something like: post
+to Instagram at 9am tomorrow.
+
+9
+00:00:37.327 --> 00:00:41.658
+A language model splits that into
+which agent, what to do, and when.
+
+10
+00:00:41.908 --> 00:00:46.594
+The scheduler checks the time is in
+the future and makes a fresh task ID.
+
+11
+00:00:46.844 --> 00:00:52.557
+It creates a Durable Object named after
+that ID, stores the task inside it,
+
+12
+00:00:52.557 --> 00:00:54.309
+and sets its one alarm.
+
+13
+00:00:54.609 --> 00:00:58.276
+Three tasks means three objects,
+each with its own clock.
+
+14
+00:00:58.676 --> 00:01:03.691
+When an alarm rings, its object wakes
+the right agent and hands it the job.
+
+15
+00:01:03.941 --> 00:01:05.499
+Then it deletes the task.
+
+16
+00:01:05.899 --> 00:01:10.102
+When I tested it, posts scheduled
+through the API fired on time.
+
+17
+00:01:10.402 --> 00:01:14.857
+From chat, some didn't, so the next
+job was adding checks to that path.

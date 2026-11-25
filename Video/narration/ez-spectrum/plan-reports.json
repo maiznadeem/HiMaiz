@@ -1,0 +1,61 @@
+[
+    {
+        "text": "A statewide radio project needed 836 license-plan reports.",
+        "say": "A statewide radio project needed eight hundred and thirty-six license-plan reports.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Each one is a PDF, built from the results of the project's studies.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "The project held 185,161 studies and over eight million results.",
+        "say": "The project held a hundred and eighty-five thousand, one hundred and sixty-one studies and over eight million results.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "One plan took more than ten minutes, because it scanned the whole results table, over a billion rows.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Scanning twice per plan, one at a time, all 836 would have taken about 280 hours.",
+        "say": "Scanning twice per plan, one at a time, all eight hundred and thirty-six would have taken about two hundred and eighty hours.",
+        "pauseAfterMs": 700
+    },
+    {
+        "text": "First I measured where a plan's time went, and most of it was loading results.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "So each plan now finds its studies first and reads only their results, not the whole table.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "One plan dropped to 20.8 seconds.",
+        "say": "One plan dropped to twenty point eight seconds.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "Then one pass over the studies finds the results for every plan at once.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Each contour is prepared once, instead of once for every licensee it's checked against.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Instead of adding a proposed eight-gigabyte index, I narrowed what each plan reads.",
+        "pauseAfterMs": 400
+    },
+    { "text": "Then one background job builds the plans sixteen at a time.", "pauseAfterMs": 300 },
+    {
+        "text": "It shows progress, lists any failure by plan, and can be cancelled.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "All 836 plans finished in about twelve minutes.",
+        "say": "All eight hundred and thirty-six plans finished in about twelve minutes.",
+        "pauseAfterMs": 400
+    },
+    { "text": "That's under a second per plan.", "pauseAfterMs": 900 }
+]

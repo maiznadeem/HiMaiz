@@ -1,0 +1,41 @@
+[
+    {
+        "text": "In one night, I sent six waves of AI coding agents across the whole platform.",
+        "pauseAfterMs": 400
+    },
+    { "text": "Each wave had a job: speed, bugs, dead code, or structure.", "pauseAfterMs": 400 },
+    {
+        "text": "Agents write code fast, so every change had to pass the same rules.",
+        "pauseAfterMs": 500
+    },
+    { "text": "Measure first, with the same harness before and after.", "pauseAfterMs": 300 },
+    { "text": "At least five runs, with the median and the spread.", "pauseAfterMs": 400 },
+    {
+        "text": "The outputs must be identical, checked against saved fixtures and hashes.",
+        "pauseAfterMs": 400
+    },
+    { "text": "Every bug fix comes with a test that fails on the old code.", "pauseAfterMs": 400 },
+    { "text": "Production is only read, never written.", "pauseAfterMs": 300 },
+    {
+        "text": "And everything lands on a preview branch, for a person to merge.",
+        "pauseAfterMs": 600
+    },
+    { "text": "Here's some of what came back.", "pauseAfterMs": 300 },
+    {
+        "text": "File downloads went from 837 milliseconds to 45.",
+        "say": "File downloads went from eight hundred and thirty-seven milliseconds to forty-five.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Time lost to memory clean-up fell from 27.5 percent of a run to 9.3.",
+        "say": "Time lost to memory clean-up fell from twenty-seven point five percent of a run to nine point three.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "The home page on a phone shows its main content in 1.98 seconds, down from 3.26.",
+        "say": "The home page on a phone shows its main content in one point nine eight seconds, down from three point two six.",
+        "pauseAfterMs": 400
+    },
+    { "text": "Security bugs were found and fixed.", "pauseAfterMs": 300 },
+    { "text": "And the build now fails if any endpoint has no access check.", "pauseAfterMs": 900 }
+]

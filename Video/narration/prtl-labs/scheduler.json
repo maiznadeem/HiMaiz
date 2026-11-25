@@ -1,0 +1,57 @@
+[
+    { "text": "Scheduled posts used to sit in a list in a key-value store.", "pauseAfterMs": 250 },
+    {
+        "text": "A cron job woke every minute to sweep it and run whatever was due.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Cloudflare has a better way to wait: a Durable Object, a small program with its own storage and an alarm.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "The catch is that each Durable Object can hold only one alarm at a time.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "So one scheduler object can't wait for three posts at three different times.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "I rebuilt the scheduler to create a new object for every task.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "You ask it something like: post to Instagram at 9am tomorrow.",
+        "say": "You ask it something like: post to Instagram at nine a.m. tomorrow.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "A language model splits that into which agent, what to do, and when.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "The scheduler checks the time is in the future and makes a fresh task ID.",
+        "say": "The scheduler checks the time is in the future and makes a fresh task I D.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "It creates a Durable Object named after that ID, stores the task inside it, and sets its one alarm.",
+        "say": "It creates a Durable Object named after that I D, stores the task inside it, and sets its one alarm.",
+        "pauseAfterMs": 300
+    },
+    { "text": "Three tasks means three objects, each with its own clock.", "pauseAfterMs": 400 },
+    {
+        "text": "When an alarm rings, its object wakes the right agent and hands it the job.",
+        "pauseAfterMs": 250
+    },
+    { "text": "Then it deletes the task.", "pauseAfterMs": 400 },
+    {
+        "text": "When I tested it, posts scheduled through the API fired on time.",
+        "say": "When I tested it, posts scheduled through the A P I fired on time.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "From chat, some didn't, so the next job was adding checks to that path.",
+        "pauseAfterMs": 600
+    }
+]

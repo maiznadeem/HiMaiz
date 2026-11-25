@@ -1,0 +1,70 @@
+[
+    {
+        "text": "Most dashboards have a quiet flaw.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "When they can't see something, they show green anyway.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "Argus is my control room, and it does the opposite.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "On every sweep it reads each source: the clouds, the address book, the code host, the server.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Each source gets sixty seconds.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "If one fails, Argus keeps its last good data and marks it stale.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "Then twenty-three rules run against what came back.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Each rule is one file, with its reason and its exceptions written down.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "A rule can pass.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "It can break, and name exactly what broke it.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "It can be excepted, on purpose, with a reason.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "Or it can say it could not check.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "Watch this source go stale.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Its rules don't stay green.",
+        "pauseAfterMs": 200
+    },
+    {
+        "text": "They turn grey.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "Could not check never counts as a pass.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "About three thousand tests hold that line.",
+        "pauseAfterMs": 800
+    }
+]

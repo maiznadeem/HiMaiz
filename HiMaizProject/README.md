@@ -139,10 +139,68 @@ Static hosting has no server, so some behaviour lives in files Cloudflare reads 
   `/opengraph-image`, `/apple-icon` and `/log/rss.xml`.
 - `public/_redirects`: `/log` goes to `/` (307).
 - `scripts/flatten-segments.mjs` runs after every build (`postbuild`). It copies Next's
-  nested route payloads to the flat file names the client router requests.
+  nested route payloads to the flat file names the client router requests. Then
+  `scripts/strip-media.mjs` removes the videos that are served from the media host
+  ([Videos](#videos)).
 
 Unknown paths get `out/404.html` with a 404 status. The RSS feed is served at
 `/log/rss.xml`.
+
+### Videos
+
+The case study videos (`public/work/**/*.mp4`) are also stored in the Cloudflare R2 bucket
+`himaiz-media`, at the same path (`work/<slug>/<scene-id>.mp4`), and served from
+`https://media.himaiz.com`. R2 answers byte-range requests (`206`), which seeking and iPhone
+playback need; Workers static assets answer them with the whole file. Posters, stills and
+caption files stay on the site's own origin. The bucket has no `r2.dev` address.
+
+`content/work/media.json` lists every uploaded video with its size, sha256 and length. It is
+written by the upload, and committed. `lib/media.ts` builds a video's address from it, adding
+`?v=` and the start of its sha256, so a re-rendered video gets a new address while its object
+keeps a year-long immutable cache.
+
+```bash
+npm run media:upload   # upload new or changed videos, then rewrite content/work/media.json
+npm run media:check    # check every listed video at media.himaiz.com: size, type, caching, ranges, CORS
+```
+
+`media:upload` needs `CLOUDFLARE_API_TOKEN` (a token with R2 write access) and
+`CLOUDFLARE_ACCOUNT_ID` in the environment, and `ffprobe` on the path. It skips videos whose
+stored sha256 matches, and it never deletes an object: remove an old one by hand. Run
+`media:check` after every upload and before a deploy.
+
+**Which build uses the media host.** `.env.production` (committed, public) sets
+`NEXT_PUBLIC_MEDIA_BASE=https://media.himaiz.com`, so every `npm run build`, including Workers
+Builds, serves the videos from R2. `npm run dev` doesn't read it, so development serves them
+from `public/`. To build without the media host, set it empty:
+`NEXT_PUBLIC_MEDIA_BASE= npm run build`. `next.config.ts` fails the build unless the value is
+empty or an `https://` origin with no path or trailing slash. With the media host:
+
+- the build fails if a video is missing from `media.json` ("upload it with npm run
+  media:upload"), or if the file in `public/` isn't the uploaded one ("re-upload it with npm
+  run media:upload"), so a re-rendered video can't ship pointing at the old object;
+- `scripts/strip-media.mjs` (`postbuild`) deletes `out/work/**/*.mp4`, so the videos aren't
+  shipped twice. Posters, stills and captions stay in `out/`.
+
+**After re-rendering a video:** run `npm run media:upload`, then `npm run media:check`, and
+commit the new `content/work/media.json` together with the video.
+
+The `<video>` loads in CORS mode (`crossOrigin="anonymous"`), so the bucket's CORS policy must
+list every origin that plays the videos: `https://himaiz.com` and the local ports used for
+development and proofs. Add an origin before it first requests a video: Cloudflare keeps a
+separate cached copy per `Origin`, so a copy cached while an origin wasn't allowed stays
+without CORS headers for that address until it is purged or the video's `?v=` changes.
+
+The bucket's settings change only through these scripts and `infra/r2-cors.json` (apply it
+with `npx wrangler r2 bucket cors set himaiz-media --file infra/r2-cors.json`), never by hand
+in the dashboard.
+
+Edge caching: Cloudflare caches `.mp4` by default, so a `GET` on the media host is cached at
+the edge (`cf-cache-status: HIT` from the second request, ranges answered from the cache with
+`206`). `HEAD` requests show `DYNAMIC`. A possible later improvement is an explicit Cache Rule
+for `media.himaiz.com` (eligible for cache, respecting the objects' own `Cache-Control`), so
+the behaviour doesn't depend on the default extension list. It's a zone setting, so it belongs
+in the zone's central config, not here.
 
 ### CI
 

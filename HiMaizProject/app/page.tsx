@@ -3,11 +3,14 @@ import { LogList } from "@/components/LogList";
 import { PaperArt } from "@/components/PaperArt";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { WorkInvite } from "@/components/WorkInvite";
 import { getLogEntries } from "@/lib/log";
 import { TAGLINE } from "@/lib/site";
+import { getWorkStudies } from "@/lib/work";
 
 export default function Home() {
     const entries = getLogEntries();
+    const studies = getWorkStudies();
     return (
         <div className="mx-auto flex min-h-dvh max-w-6xl flex-col page-pad">
             <SiteHeader />
@@ -22,6 +25,7 @@ export default function Home() {
                     </div>
                     <PaperArt className="w-full max-w-[22rem] md:max-w-[30rem] md:justify-self-end" />
                 </section>
+                <WorkInvite studies={studies} />
                 <LogList entries={entries} />
             </main>
             <div className="mt-16">

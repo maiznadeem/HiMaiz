@@ -1,0 +1,58 @@
+[
+    {
+        "text": "A bank statement is a list of lines, and reading one is easy to get slightly wrong.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Miss one line, or read one number wrong, and the ledger is off for good.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Nobody notices.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "So Summa doesn't trust what it reads until the statement proves it.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Every statement prints an opening balance and a closing balance.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Summa starts from the opening balance and adds every line it read.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "If the total lands exactly on the closing balance, the statement is trusted.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "If it's off by even one unit, the whole statement is rejected.",
+        "pauseAfterMs": 500
+    },
+    {
+        "text": "There's a second trap.",
+        "pauseAfterMs": 300
+    },
+    {
+        "text": "Two exports from the same account can overlap, and the first one can stop halfway through a day.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Cut by date, and you either count that day twice or lose the rest of it.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "So Summa finds the line where the first export's running balance stopped, and cuts right after it.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Nothing is counted twice, and nothing is lost.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "Every statement line in the ledger came from a statement that added up.",
+        "pauseAfterMs": 800
+    }
+]

@@ -1,0 +1,68 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:05.769
+The owner asked to start, pause and
+stop every service, and read its logs.
+
+2
+00:00:06.169 --> 00:00:07.483
+None of that existed.
+
+3
+00:00:08.083 --> 00:00:13.975
+So first, every service writes the same kind
+of log, in rolling files tagged by app.
+
+4
+00:00:14.375 --> 00:00:18.537
+Then I added a small supervisor
+that depends on none of the apps.
+
+5
+00:00:18.837 --> 00:00:22.984
+It reports each service's
+state, CPU, memory and uptime.
+
+6
+00:00:23.284 --> 00:00:26.665
+It starts and stops them,
+and streams their logs live.
+
+7
+00:00:26.965 --> 00:00:30.764
+Because it stands apart, it still
+answers when an app won't start.
+
+8
+00:00:31.364 --> 00:00:35.838
+Pausing the workers is a row in the
+database, not a signal or a file.
+
+9
+00:00:36.138 --> 00:00:40.809
+Flip it, and the whole fleet pauses together,
+while the study in flight finishes.
+
+10
+00:00:41.309 --> 00:00:44.937
+An Operations page puts all
+of it in one place, live.
+
+11
+00:00:45.537 --> 00:00:47.012
+Then I cleaned up the cloud.
+
+12
+00:00:47.312 --> 00:00:51.449
+Hosting and monitoring that had
+never served a user were deleted.
+
+13
+00:00:51.849 --> 00:00:54.671
+Deploys became one job, with a rollback.
+
+14
+00:00:54.971 --> 00:00:58.729
+Push to live went from about fifteen
+minutes to thirty-five seconds.

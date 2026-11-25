@@ -1,0 +1,53 @@
+[
+    {
+        "text": "Our backend team is small, so I lead it by directing AI coding agents.",
+        "say": "Our backend team is small, so I lead it by directing A I coding agents.",
+        "pauseAfterMs": 400
+    },
+    {
+        "text": "I set the goal and the rules for each piece of work, and ask for a plan.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "Agents write much of the code, the load-test tools and the reports.",
+        "pauseAfterMs": 250
+    },
+    { "text": "I make the go and no-go calls, and review what comes back.", "pauseAfterMs": 250 },
+    {
+        "text": "Design decisions get written down, and there are 60 decision records so far.",
+        "say": "Design decisions get written down, and there are sixty decision records so far.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "Of my 2,782 backend commits, 1,503 were co-written with an agent.",
+        "say": "Of my two thousand seven hundred eighty-two backend commits, fifteen hundred and three were co-written with an agent.",
+        "pauseAfterMs": 500
+    },
+    { "text": "That only works if checking the work is fast.", "pauseAfterMs": 250 },
+    {
+        "text": "Our test suite took about 30 minutes, and every pull request paid for it two or three times.",
+        "say": "Our test suite took about thirty minutes, and every pull request paid for it two or three times.",
+        "pauseAfterMs": 250
+    },
+    { "text": "The tests weren't slow.", "pauseAfterMs": 200 },
+    {
+        "text": "The setup was, with mocks rebuilt for every test and real password hashing for every fake user.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "I made the setup cheap and spread the suite across 24 workers.",
+        "say": "I made the setup cheap and spread the suite across twenty-four workers.",
+        "pauseAfterMs": 250
+    },
+    {
+        "text": "Now 8,253 tests run in 91 seconds.",
+        "say": "Now eight thousand two hundred fifty-three tests run in ninety-one seconds.",
+        "pauseAfterMs": 500
+    },
+    { "text": "One workflow now deploys all three environments.", "pauseAfterMs": 250 },
+    {
+        "text": "In its first two weeks, a production deploy took a median of 2 minutes 40 seconds.",
+        "say": "In its first two weeks, a production deploy took a median of two minutes forty seconds.",
+        "pauseAfterMs": 800
+    }
+]

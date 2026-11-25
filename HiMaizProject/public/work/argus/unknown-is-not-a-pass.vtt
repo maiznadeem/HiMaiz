@@ -1,0 +1,81 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:03.252
+Most dashboards have a quiet flaw.
+
+2
+00:00:03.552 --> 00:00:06.554
+When they can't see something,
+they show green anyway.
+
+3
+00:00:07.054 --> 00:00:10.284
+Argus is my control room,
+and it does the opposite.
+
+4
+00:00:10.684 --> 00:00:15.498
+On every sweep it reads each source: the
+clouds, the address book, the code host,
+
+5
+00:00:15.498 --> 00:00:16.152
+the server.
+
+6
+00:00:16.452 --> 00:00:18.317
+Each source gets sixty seconds.
+
+7
+00:00:18.617 --> 00:00:22.943
+If one fails, Argus keeps its last
+good data and marks it stale.
+
+8
+00:00:23.443 --> 00:00:26.511
+Then twenty-three rules run
+against what came back.
+
+9
+00:00:26.811 --> 00:00:31.443
+Each rule is one file, with its reason
+and its exceptions written down.
+
+10
+00:00:31.843 --> 00:00:33.043
+A rule can pass.
+
+11
+00:00:33.243 --> 00:00:35.898
+It can break, and name
+exactly what broke it.
+
+12
+00:00:36.098 --> 00:00:38.803
+It can be excepted, on
+purpose, with a reason.
+
+13
+00:00:39.003 --> 00:00:40.750
+Or it can say it could not check.
+
+14
+00:00:41.250 --> 00:00:42.922
+Watch this source go stale.
+
+15
+00:00:43.222 --> 00:00:44.918
+Its rules don't stay green.
+
+16
+00:00:45.118 --> 00:00:46.210
+They turn grey.
+
+17
+00:00:46.710 --> 00:00:48.884
+Could not check never counts as a pass.
+
+18
+00:00:49.284 --> 00:00:51.734
+About three thousand tests hold that line.

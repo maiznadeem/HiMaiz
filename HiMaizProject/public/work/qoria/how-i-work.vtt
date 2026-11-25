@@ -1,0 +1,77 @@
+WEBVTT
+
+1
+00:00:01.200 --> 00:00:06.041
+Our backend team is small, so I lead
+it by directing AI coding agents.
+
+2
+00:00:06.441 --> 00:00:11.161
+I set the goal and the rules for each
+piece of work, and ask for a plan.
+
+3
+00:00:11.411 --> 00:00:15.645
+Agents write much of the code, the
+load-test tools and the reports.
+
+4
+00:00:15.895 --> 00:00:19.745
+I make the go and no-go calls,
+and review what comes back.
+
+5
+00:00:19.995 --> 00:00:25.121
+Design decisions get written down, and
+there are 60 decision records so far.
+
+6
+00:00:25.371 --> 00:00:32.597
+Of my 2,782 backend commits, 1,503
+were co-written with an agent.
+
+7
+00:00:33.097 --> 00:00:35.491
+That only works if
+checking the work is fast.
+
+8
+00:00:35.741 --> 00:00:37.741
+Our test suite took about 30 minutes,
+
+9
+00:00:37.741 --> 00:00:41.476
+and every pull request paid
+for it two or three times.
+
+10
+00:00:41.726 --> 00:00:43.045
+The tests weren't slow.
+
+11
+00:00:43.245 --> 00:00:44.585
+The setup was,
+
+12
+00:00:44.585 --> 00:00:49.485
+with mocks rebuilt for every test and real
+password hashing for every fake user.
+
+13
+00:00:49.735 --> 00:00:53.845
+I made the setup cheap and spread
+the suite across 24 workers.
+
+14
+00:00:54.095 --> 00:00:58.748
+Now 8,253 tests run in 91 seconds.
+
+15
+00:00:59.248 --> 00:01:02.442
+One workflow now deploys
+all three environments.
+
+16
+00:01:02.692 --> 00:01:08.045
+In its first two weeks, a production deploy
+took a median of 2 minutes 40 seconds.

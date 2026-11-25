@@ -10,7 +10,7 @@
     "scripts": {
         "dev": "next dev --webpack",
         "build": "next build",
-        "postbuild": "node scripts/flatten-segments.mjs",
+        "postbuild": "node scripts/flatten-segments.mjs && node scripts/strip-media.mjs",
         "start": "next start",
         "lint": "eslint .",
         "typecheck": "tsc --noEmit",
@@ -18,7 +18,9 @@
         "format:check": "prettier --check .",
         "test": "vitest run",
         "preview": "npm run build && wrangler dev",
-        "deploy": "npm run build && wrangler deploy && wrangler deploy -c edge/www/wrangler.toml"
+        "deploy": "npm run build && wrangler deploy && wrangler deploy -c edge/www/wrangler.toml",
+        "media:upload": "node scripts/media-upload.mjs",
+        "media:check": "node scripts/media-check.mjs"
     },
     "dependencies": {
         "gray-matter": "^4.0.3",
